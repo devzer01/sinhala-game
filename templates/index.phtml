@@ -35,7 +35,7 @@
             }
         </style>
     </head>
-    <body>
+    <body oncopy="return false" oncut="return false" onpaste="return false">
         <div class="container-fluid" id="welcome">
             <div class="row">
                 <div class="col-xs-12 text-right">
@@ -218,7 +218,10 @@
                 $(".welcomeButton").click(function (e) {
                     $("#welcome").show();
                     $("#help").hide();
-                })
+                });
+                $('body, #currentWord').bind('copy paste cut',function(e) {
+                    e.preventDefault(); return false;
+                });
             });
 
             //U+0D80..U+0DFF
