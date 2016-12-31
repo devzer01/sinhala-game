@@ -92,8 +92,8 @@
                     <thead>
                         <tr>
                             <th>ප්‍රයත්නය</th>
-                            <th>කාලය</th>
-                            <th>ලකුනු</th>
+                            <th>කාලය (තත්පර)</th>
+                            <th>ලකුණු</th>
                         </tr>
                     </thead>
                     <tbody id="history"></tbody>
@@ -335,10 +335,10 @@
                     }
                 } else {
                     if (isFirstTime) {
-                        score = score - 15;
+                        score = score - 5;
                         wordScoreIndex[position] = 1; //first mistake
                     } else {
-                        score = score - 10;
+                        score = score - 4;
                     }
                 }
                 $("#score").text(score);
@@ -392,7 +392,7 @@
                 var tdTime = document.createElement("td");
                 var tdScore = document.createElement("td");
                 tdWord.innerText = currentWord;
-                tdTime.innerText = timeTaken;
+                tdTime.innerText = timeTaken.toFixed(2);
                 tdScore.innerText = wordScore;
                 tr.appendChild(tdWord);
                 tr.appendChild(tdTime);
