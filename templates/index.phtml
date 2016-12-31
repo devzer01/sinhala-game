@@ -315,8 +315,7 @@
                 var isCorrectChar = currentWordCodes[position] === currentCode;
                 var isFirstTime = (wordScoreIndex[position] == 0);
                 var isComplete = currentWord.length === currentText.length;
-                $("#debug").html($("#debug").html() + "<br/> keyPress: " + keyPress +  ", currentCode:" + currentCode + ", isCorrectChar: " + isCorrectChar + ", isFirstTime:" + isFirstTime + ", isComplete:" + isComplete + "\n");
-                console.log("keyPress: " + keyPress +  ", currentCode:" + currentCode + ", isCorrectChar: " + isCorrectChar + ", isFirstTime:" + isFirstTime + ", isComplete:" + isComplete);
+
                 if (isCorrectChar) {
                     if (isFirstTime) {
                         score = score + 10;
@@ -338,6 +337,11 @@
 
                     }
                 } else {
+                    var debugInput = [];
+                    for (var i=0; i < currentText.length; i++) {
+                        debugInput[i] = fixedCharCodeAt(currentText, i);
+                    }
+                    $("#debug").html("Expected List: " + currentWordCodes.join("\n,") + "\n<br/>" + debugInput.join("\n,") + "   keyPress: " + keyPress +  ", currentCode:" + currentCode);
                     if (isFirstTime) {
                         score = score - 5;
                         wordScoreIndex[position] = 1; //first mistake
