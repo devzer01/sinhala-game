@@ -86,10 +86,7 @@
                 <button class="btn btn-primary btn-lg startButton">නැවත කරමු</button>
             </div>
 
-
-            <pre id="debug">
-                Debug
-            </pre>
+            <pre id="debug" style="display: none;"></pre>
             <h4 style="border-bottom: gray 1px solid;">ලකුනු පුවරැව</h4>
             <div class="table-responsive">
                 <table class="table table-stripe table-bordered" id="historyTable">
@@ -181,7 +178,7 @@
             var wordStart = 0.0;
             var wordStop = 0.0;
 
-            var wordList = ["අම්මා", "මගුල්කෑම", "රැකියාව", "අලුත් අවුරුද්ද", "මිතුරා", "ඡනාවාස", "විනොද සවාරිය", "ඡනපති", "පියතුමා", "සිරිත් විරිත්"];
+            var wordList = ["අම්මා", "මගුල්කෑම", "රැකියාව", "අලුත් අවුරුද්ද", "මිතුරා", "ඡනාවාස", "සවාරිය", "ඡනපති", "පියතුමා", "සිරිත් විරිත්"];
 
             var currentGameWordOrder;
 
@@ -289,7 +286,7 @@
                 }
                 return code;
             }
-            
+
             function checkInput(e) {
                 var keyPress = e.which;
                 var currentText = $("#type-here").val().trim();
@@ -306,7 +303,7 @@
 */
                 var isCorrectChar = currentWordCodes[position] === currentCode;
                 var isFirstTime = (wordScoreIndex[position] == 0);
-                var isComplete = currentWord.length === currentText.length;
+                var isComplete = currentWord.length === currentText.length && currentWord === currentText
 
                 if (isCorrectChar) {
                     if (isFirstTime) {
@@ -356,6 +353,7 @@
                 $("#type-here").css("background-color", "white");
                 $("#type-here").css("text-align", "left");
                 $("#type-here").css("color", "black");
+                $("#type-here").css("font-size", "26px");
             }
 
             function showWon() {
@@ -363,6 +361,7 @@
                 $("#type-here").css("background-color", "#c7e597");
                 $("#type-here").css("text-align", "center");
                 $("#type-here").css("color", "white");
+                $("#type-here").css("font-size", "16px");
                 $("#type-here").val("ඔබ දිනුම්.... " + getScoreText());
             }
             
@@ -371,6 +370,7 @@
                 $("#type-here").css("background-color", "#e85167");
                 $("#type-here").css("text-align", "center");
                 $("#type-here").css("color", "white");
+                $("#type-here").css("font-size", "16px");
                 $("#type-here").val("කාලය අවසන් " + getScoreText());
             }
 
