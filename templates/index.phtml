@@ -38,8 +38,11 @@
     <body oncopy="return false" oncut="return false" onpaste="return false">
         <div class="container-fluid" id="welcome">
             <div class="row">
+                <div class="col-xs-12 text-right" style="padding-left: 0px; padding-right: 0px; background-image: url(img/bghead.png); background-position: left; background-repeat: no-repeat; ">
+                    <h1 class="vtop">ආයුබෝවන්</h1>
+                </div>
                 <div class="col-xs-12 text-right">
-                    <h1>ආයුබෝවන් <small>විනෝදමත් අද්‍යාපනය</small></h1>
+                    <h1 style="margin-top: 0px; margin-bottom: 0px;"><small>විනෝදමත් අද්‍යාපනය</small></h1>
                 </div>
             </div>
             <hr />
@@ -58,6 +61,7 @@
                     <ul style="line-height: 30px;">
                         <li>ආරම්භය කොටන්න</li>
                         <li>දකින වචනය ටයිප් කරන්න</li>
+                        <li>ශුද්ධ සිංහල පමණි (ෆොනෙටික් භාවිතා නොකරන්න)</li>
                     </ul>
                 </div>
             </div>
@@ -121,8 +125,12 @@
                         <li>ඇනුඩ්‍රායිඩ් - <a href="https://play.google.com/store/apps/details?id=com.touchtype.swiftkey">ස්විෆ්ට් කී</a></li>
                         <li>අයිෆෝන් - <a href="http://keyman.com/sinhala/garp/">කී මැන්</a></li>
                         <li>ලිනක්ස් - <a href="http://sinhala.sourceforge.net/">සෝස් ෆාඡ්</a></li>
+                        <li>ක්‍රෝම් - <a href="https://chrome.google.com/webstore/detail/google-input-tools/mclkkofklkfljcocdinagocijmpgbhab">ශුද්ධ සිංහල පමණි</a></li>
                     </ul>
                 </div>
+
+                <div class="text-center col-xs-12" style="color: orangered;">කොපි පේස්ට් කිරිම සහ අනිත් ෆොනෙටික් වරයේ මෙවලමු උපයෝගී කරගැනීමේදි ලකුණු කැපියා හැක</div>
+
             </div>
             <hr />
             <div class="row" style="height: 100px; vertical-align: middle;">
@@ -418,6 +426,10 @@
                 wordStart = timerValue;
                 wordScoreBegin = score;
                 $("#type-here").keyup(checkInput);
+                $("#type-here").blur(function () {
+                    score = score - 100;
+                    $("#score").text(score);
+                });
             }
 
             function reduceTime() {
