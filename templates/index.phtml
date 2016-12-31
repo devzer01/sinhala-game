@@ -148,6 +148,7 @@
 
         <script type="text/javascript">
 
+            //http://jrgraphix.net/r/Unicode/0D80-0DFF
             (function($){
                 $.fn.shuffle = function() {
                     return this.each(function(){
@@ -173,24 +174,14 @@
             var timeoutVal = null;
             var score = 0;
             var currentWord = null;
-            var currentWordCodes = new Array();
+            var currentWordCodes = [];
             var typedSoFar = [];
-            var wordScoreIndex = new Array();
+            var wordScoreIndex = [];
             var wordScoreBegin = 0;
             var wordStart = 0.0;
             var wordStop = 0.0;
 
-            var wordList = new Array(
-                "අම්මා",
-                "ආසනය",
-                "සදුදා",
-                "අලුත් අවුරුද්ද",
-                "මිතුරා",
-                "ඡනාවාස",
-                "විනොද සවාරිය",
-                "සිරිසේන",
-                "පියා",
-                "සිරිත්විරිත්");
+            var wordList = ["අම්මා", "මගුල්කෑම", "රැකියාව", "අලුත් අවුරුද්ද", "මිතුරා", "ඡනාවාස", "විනොද සවාරිය", "ඡනපති", "පියතුමා", "සිරිත් විරිත්"];
 
             var currentGameWordOrder;
 
@@ -199,6 +190,7 @@
                     $("#welcome").hide();
                     $("#help").hide();
                     $("#game").show();
+                    $("#history").html("");
                     hideReply();
                     score = 0;
                     timerValue = 60.00;
