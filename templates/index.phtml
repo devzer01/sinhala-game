@@ -28,7 +28,7 @@
             }
 
             footer {
-                position: fixed;
+                position: absolute;
                 height: 30px;
                 bottom: 0;
                 width: 100%;
@@ -86,6 +86,10 @@
                 <button class="btn btn-primary btn-lg startButton">නැවත කරමු</button>
             </div>
 
+
+            <pre id="debug">
+                Debug
+            </pre>
             <h4 style="border-bottom: gray 1px solid;">ලකුනු පුවරැව</h4>
             <div class="table-responsive">
                 <table class="table table-stripe table-bordered" id="historyTable">
@@ -98,7 +102,6 @@
                     </thead>
                     <tbody id="history"></tbody>
                 </table>
-
             </div>
 
         </div>
@@ -312,6 +315,7 @@
                 var isCorrectChar = currentWordCodes[position] === currentCode;
                 var isFirstTime = (wordScoreIndex[position] == 0);
                 var isComplete = currentWord.length === currentText.length;
+                $("#debug").html($("#debug").html() + "<br/> keyPress: " + keyPress +  ", currentCode:" + currentCode + ", isCorrectChar: " + isCorrectChar + ", isFirstTime:" + isFirstTime + ", isComplete:" + isComplete + "\n");
                 console.log("keyPress: " + keyPress +  ", currentCode:" + currentCode + ", isCorrectChar: " + isCorrectChar + ", isFirstTime:" + isFirstTime + ", isComplete:" + isComplete);
                 if (isCorrectChar) {
                     if (isFirstTime) {
