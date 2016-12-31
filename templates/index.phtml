@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <title>Sinhala Game</title>
+
+        <!-- Bootstrap -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+        <style>
+            #game {
+                display: none;
+            }
+            #welcome {
+                display: block;
+            }
+            #help {
+                display: none;
+            }
+
+            footer {
+                position: fixed;
+                height: 30px;
+                bottom: 0;
+                width: 100%;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container-fluid" id="welcome">
+            <div class="row">
+                <div class="col-xs-12 text-right">
+                    <h1>ආයුබෝවන් <small>විනෝදමත් අද්‍යාපනය</small></h1>
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-xs-6 text-center small vcenter">සිංහල යතුරු පුවරැවක් අව්‍ශ්‍ය උපදෙස් බොත්තම කොටන්න</div>
+                <div class="col-xs-6 text-center">
+                    <button id="showHelp" class="btn btn-default btn-info">යතුරු ලියන උපදෙස්</button>
+                </div>
+            </div>
+            <hr />
+            <div class="row" style="height: 100px;">
+                <div class="col-xs-12">
+                    <h4 class="text-left" style="color: green;"><strong>තරග වදින හැටි</strong></h4>
+                </div>
+                <div class="col-xs-12">
+                    <ul style="line-height: 30px;">
+                        <li>ආරම්භය කොටන්න</li>
+                        <li>දකින වචනය ටයිප් කරන්න</li>
+                    </ul>
+                </div>
+            </div>
+            <hr />
+            <div class="row" style="height: 100px; vertical-align: middle;">
+                <div class="col-xs-12 text-center" style="padding-top: 30px;">
+                    <button class="btn btn-primary btn-lg startButton">ආරම්භය</button>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid" id="game">
+            <div class="row" style="border-radius: 4px; height: 30px; margin-top: 15px; background-color: #1b6d85; margin-left: 20px; margin-right: 20px; color: white; font-size: 18px; font-weight: bold;">
+                <div class="col-xs-6 text-left"><span>කාලය:&nbsp;&nbsp;</span><span id="timer">60.000</span></div>
+                <div class="col-xs-6 text-right"><span>ලකුණු:&nbsp;&nbsp;</span><span id="score">0</span></div>
+            </div>
+
+            <div class="row" style="height: 150px; margin-top: 5px;">
+                <div class="col-xs-12 text-center"><h1 id="currentWord">5</h1></div>
+                <div class="col-xs-12">
+                    <textarea id="type-here" style="font-size: 26px !important; font-weight: bold !important;" class="form-control" rows="1"></textarea>
+                </div>
+            </div>
+
+            <div id='infoPanel' class="alert alert-danger text-center bold" role="alert" style="font-weight: bold">ඉහල වචනය ඉක්මනින් ටයිප් කරන්න</div>
+            <div id='replayPanel' class="alert alert-info text-center bold" role="alert" style="font-weight: bold; display: none;">
+                <button class="btn btn-primary btn-lg startButton">නැවත කරමු</button>
+            </div>
+
+            <h4 style="border-bottom: gray 1px solid;">ලකුනු පුවරැව</h4>
+            <div class="table-responsive">
+                <table class="table table-stripe table-bordered" id="historyTable">
+                    <thead>
+                        <tr>
+                            <th>ප්‍රයත්නය</th>
+                            <th>කාලය</th>
+                            <th>ලකුනු</th>
+                        </tr>
+                    </thead>
+                    <tbody id="history"></tbody>
+                </table>
+
+            </div>
+
+        </div>
+
+
+        <div class="container-fluid" id="help">
+            <div class="row">
+                <div class="col-xs-12 text-right">
+                    <h1>ආයුබෝවන් <small>විනෝදමත් අද්‍යාපනය</small></h1>
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-xs-12">
+                    <h4>ස්තාපන උපදෙස්</h4>
+                </div>
+                <div class="col-xs-12">
+                    <ul>
+                        <li>වින්ඩෝස් - <a href="https://youtu.be/-Pplub4SJ3U">යුනිකෝඩ් වින්ඩෝස්</a></li>
+                        <li>ඇනුඩ්‍රායිඩ් - <a href="https://play.google.com/store/apps/details?id=com.touchtype.swiftkey">ස්විෆ්ට් කී</a></li>
+                        <li>අයිෆෝන් - <a href="http://keyman.com/sinhala/garp/">කී මැන්</a></li>
+                        <li>ලිනක්ස් - <a href="http://sinhala.sourceforge.net/">සෝස් ෆාඡ්</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr />
+            <div class="row" style="height: 100px; vertical-align: middle;">
+                <div class="col-xs-6 text-center" style="padding-top: 30px;">
+                    <button class="btn btn-primary btn-lg startButton">ආරම්භය</button>
+                </div>
+                <div class="col-xs-6 text-center" style="padding-top: 30px;">
+                    <button class="btn btn-primary btn-lg welcomeButton">මුල් පිටුව</button>
+                </div>
+            </div>
+            <hr />
+        </div>
+
+
+
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="js/bootstrap.min.js"></script>
+
+        <script type="text/javascript">
+
+            (function($){
+                $.fn.shuffle = function() {
+                    return this.each(function(){
+                        var items = $(this).children();
+                        return (items.length)
+                            ? $(this).html($.shuffle(items))
+                            : this;
+                    });
+                };
+
+                $.shuffle = function(arr) {
+                    for(
+                        var j, x, i = arr.length; i;
+                        j = parseInt(Math.random() * i),
+                            x = arr[--i], arr[i] = arr[j], arr[j] = x
+                    );
+                    return arr;
+                }
+            })(jQuery);
+
+            var timerValue = 60.00;
+            var timeout = 5;
+            var timeoutVal = null;
+            var score = 0;
+            var currentWord = null;
+            var currentWordCodes = new Array();
+            var typedSoFar = [];
+            var wordScoreIndex = new Array();
+            var wordScoreBegin = 0;
+            var wordStart = 0.0;
+            var wordStop = 0.0;
+
+            var wordList = new Array(
+                "අම්මා",
+                "ආසනය",
+                "සදුදා",
+                "අලුත් අවුරුද්ද",
+                "මිතුරා",
+                "ඡනාවාස",
+                "විනොද සවාරිය",
+                "සිරිසේන",
+                "පියා",
+                "සිරිත්විරිත්");
+
+            var currentGameWordOrder;
+
+            $(document).ready(function (e) {
+                $(".startButton").click(function (e) {
+                    $("#welcome").hide();
+                    $("#help").hide();
+                    $("#game").show();
+                    hideReply();
+                    score = 0;
+                    timerValue = 60.00;
+                    timeout = 5;
+                    currentWord = null;
+                    currentGameWordOrder = $.shuffle(wordList);
+                    currentWordCodes = [];
+                    wordScoreIndex = [];
+                    wordScoreBegin = 0;
+                    $("#type-here").val("");
+                    $("#score").text(score);
+                    $("#timer").text(timerValue);
+                    timeoutVal = setInterval(function () {
+                        $("#currentWord").text(--timeout);
+                        $("#infoPanel").show();
+                        $("#replayPanel").hide();
+                        if (timeout == 0) {
+                            clearInterval(timeoutVal);
+                            timeoutVal = null;
+                            showNextWord();
+                        }
+                    }, 1000);
+                });
+                $("#showHelp").click(function (e) {
+                    $("#welcome").hide();
+                    $("#help").show();
+                });
+                $(".welcomeButton").click(function (e) {
+                    $("#welcome").show();
+                    $("#help").hide();
+                })
+            });
+
+            //U+0D80..U+0DFF
+            function isSinhalaLetter(letter) {
+
+                return /[^\u0d80-\u0dff]/.test(letter);
+            }
+
+            function fixedCharCodeAt(str, idx) {
+                // ex. fixedCharCodeAt('\uD800\uDC00', 0); // 65536
+                // ex. fixedCharCodeAt('\uD800\uDC00', 1); // false
+                idx = idx || 0;
+                var code = str.charCodeAt(idx);
+                var hi, low;
+
+                // High surrogate (could change last hex to 0xDB7F to treat high
+                // private surrogates as single characters)
+                if (0xD800 <= code && code <= 0xDBFF) {
+                    hi = code;
+                    low = str.charCodeAt(idx + 1);
+                    if (isNaN(low)) {
+                        throw 'High surrogate not followed by low surrogate in fixedCharCodeAt()';
+                    }
+                    return ((hi - 0xD800) * 0x400) + (low - 0xDC00) + 0x10000;
+                }
+                if (0xDC00 <= code && code <= 0xDFFF) { // Low surrogate
+                    // We return false to allow loops to skip this iteration since should have
+                    // already handled high surrogate above in the previous iteration
+                    return false;
+                    /*hi = str.charCodeAt(idx - 1);
+                     low = code;
+                     return ((hi - 0xD800) * 0x400) + (low - 0xDC00) + 0x10000;*/
+                }
+                return code;
+            }
+
+            function knownCharCodeAt(str, idx) {
+                str += '';
+                var code,
+                    end = str.length;
+
+                var surrogatePairs = /[\u0D80-\u0DFF]/g;
+                while ((surrogatePairs.exec(str)) != null) {
+                    var li = surrogatePairs.lastIndex;
+                    if (li - 2 < idx) {
+                        idx++;
+                    }
+                    else {
+                        break;
+                    }
+                }
+
+                if (idx >= end || idx < 0) {
+                    return NaN;
+                }
+
+                code = str.charCodeAt(idx);
+
+                var hi, low;
+                if (0x0D80 <= code && code <= 0x0DFF) {
+                    hi = code;
+                    low = str.charCodeAt(idx + 1);
+                    // Go one further, since one of the "characters" is part of a surrogate pair
+                    return ((hi - 0x0D80) * 0x400) + (low - 0x0DFF) + 0x10000;
+                }
+                return code;
+            }
+            
+            function checkInput(e) {
+                var keyPress = e.which;
+                var currentText = $("#type-here").val().trim();
+                var position = currentText.length - 1;
+                var currentCode = fixedCharCodeAt(currentText, currentText.length - 1);
+                if (keyPress === 8) {
+                    return true;
+                }
+/*
+                if (!isSinhalaLetter(currentChar)) {
+                    console.log('incorrect letter');
+                    return false;
+                }
+*/
+                var isCorrectChar = currentWordCodes[position] === currentCode;
+                var isFirstTime = (wordScoreIndex[position] == 0);
+                var isComplete = currentWord.length === currentText.length;
+                console.log("keyPress: " + keyPress +  ", currentCode:" + currentCode + ", isCorrectChar: " + isCorrectChar + ", isFirstTime:" + isFirstTime + ", isComplete:" + isComplete);
+                if (isCorrectChar) {
+                    if (isFirstTime) {
+                        score = score + 10;
+                    } else {
+                        score = score + 3;
+                    }
+
+                    if (isComplete) {
+                        wordStop = timerValue;
+                        putScore();
+                        if (wordList.length === 0) {
+                            clearInterval(timeoutVal);
+                            timeoutVal = null;
+                            showReplay();
+                            showWon();
+                        } else {
+                            showNextWord();
+                        }
+
+                    }
+                } else {
+                    if (isFirstTime) {
+                        score = score - 15;
+                        wordScoreIndex[position] = 1; //first mistake
+                    } else {
+                        score = score - 10;
+                    }
+                }
+                $("#score").text(score);
+            }
+
+            function showReplay() {
+                $("#infoPanel").hide();
+                $("#replayPanel").show();
+            }
+
+            function hideReply() {
+                $("#infoPanel").show();
+                $("#replayPanel").hide();
+                $("#type-here").removeAttr("disabled");
+                $("#type-here").css("background-color", "white");
+                $("#type-here").css("text-align", "left");
+                $("#type-here").css("color", "black");
+            }
+
+            function showWon() {
+                $("#type-here").attr("disabled","disabled");
+                $("#type-here").css("background-color", "#c7e597");
+                $("#type-here").css("text-align", "center");
+                $("#type-here").css("color", "white");
+                $("#type-here").val("ඔබ දිනුම්.... " + getScoreText());
+            }
+            
+            function showLost() {
+                $("#type-here").attr("disabled","disabled");
+                $("#type-here").css("background-color", "#e85167");
+                $("#type-here").css("text-align", "center");
+                $("#type-here").css("color", "white");
+                $("#type-here").val("කාලය අවසන් " + getScoreText());
+            }
+
+            function getScoreText() {
+                return "ලකුණු: " + score + " කාලය: " + (60.0 - timerValue).toFixed(2);
+            }
+
+            function putScore() {
+                var timeTaken = wordStart - wordStop;
+                var wordScore = score - wordScoreBegin;
+                var color = "danger";
+                if (timeTaken < 10) {
+                    color = "success";
+                } else if (wordScore > 0) {
+                    color = "warning";
+                }
+                var tr = document.createElement("tr");
+                var tdWord = document.createElement("td");
+                var tdTime = document.createElement("td");
+                var tdScore = document.createElement("td");
+                tdWord.innerText = currentWord;
+                tdTime.innerText = timeTaken;
+                tdScore.innerText = wordScore;
+                tr.appendChild(tdWord);
+                tr.appendChild(tdTime);
+                tr.appendChild(tdScore);
+                tr.className = color;
+                $("#history").append(tr);
+            }
+
+            function showNextWord() {
+                $("#type-here").val("");
+                currentWord = wordList.pop();
+                currentWordCodes = [];
+                for (var i=0; i < currentWord.length; i++) {
+                    currentWordCodes[i] = fixedCharCodeAt(currentWord, i);
+                }
+                wordScoreIndex.fill(0, 0, currentWord.length);
+                $("#currentWord").text(currentWord);
+                $("#type-here").focus();
+                if (timeoutVal === null) timeoutVal = setInterval(reduceTime, 10);
+                wordStart = timerValue;
+                wordScoreBegin = score;
+                $("#type-here").keyup(checkInput);
+            }
+
+            function reduceTime() {
+                timerValue = timerValue - 0.01;
+                if (timerValue <= 0.0) {
+                    clearInterval(timeoutVal);
+                    showReplay();
+                    showLost();
+                    timeoutVal = null;
+                }
+                $("#timer").text(timerValue.toFixed(2));
+            }
+        </script>
+        <footer class="footer text-center">
+            2017 ඕල් රයිට්ස් රිසව්ඩ් - පිටුව සහ අපි
+        </footer>
+    </body>
+</html>
