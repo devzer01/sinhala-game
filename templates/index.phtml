@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-        <title>Sinhala Game</title>
+        <title>යතුරු කරනය ඉගන ගනිමු</title>
 
         <!-- Bootstrap -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -28,7 +28,7 @@
             }
 
             footer {
-                position: absolute;
+                position: relative;
                 height: 30px;
                 bottom: 0;
                 width: 100%;
@@ -36,7 +36,7 @@
         </style>
     </head>
     <body oncopy="return false" oncut="return false" onpaste="return false">
-        <div class="container-fluid" id="welcome">
+        <label class="container-fluid" id="welcome">
             <div class="row">
                 <div class="col-xs-12 text-right" style="padding-left: 0px; padding-right: 0px; background-image: url(img/bghead.png); background-position: left; background-repeat: no-repeat; ">
                     <h1 class="vtop">ආයුබෝවන්</h1>
@@ -47,13 +47,14 @@
             </div>
             <hr />
             <div class="row">
-                <div class="col-xs-6 text-center small vcenter">සිංහල යතුරු පුවරැවක් අව්‍ශ්‍ය උපදෙස් බොත්තම කොටන්න</div>
-                <div class="col-xs-6 text-center">
+                <div class="col-xs-12 col-sm-6 col-md-6 text-center small vcenter">සිංහල යතුරු පුවරැවක් අව්‍ශ්‍ය උපදෙස් බොත්තම කොටන්න</div>
+                <div class="visible-xs">&nbsp;</div>
+                <div class="col-xs-12 col-sm-6 col-md-6 text-center">
                     <button id="showHelp" class="btn btn-default btn-info">යතුරු ලියන උපදෙස්</button>
                 </div>
             </div>
             <hr />
-            <div class="row" style="height: 100px;">
+            <div class="row" style="height: 130px;">
                 <div class="col-xs-12">
                     <h4 class="text-left" style="color: green;"><strong>තරග වදින හැටි</strong></h4>
                 </div>
@@ -67,10 +68,17 @@
             </div>
             <hr />
             <div class="row" style="height: 100px; vertical-align: middle;">
-                <div class="col-xs-12 text-center" style="padding-top: 30px;">
+                <div class="col-xs-12 col-md-12 text-center" style="padding-top: 10px;">
+                    <label class="radio-inline"><input type="radio" name="difficulty" id="easy" value="easy">ලේසි</label>
+                    <label class="radio-inline"><input type="radio" name="difficulty" id="medium" value="medium">ෂෙප්</label>
+                    <label class="radio-inline"><input type="radio" name="difficulty" id="hard" value="hard">අපෝ</label>
+                    <label class="radio-inline"><input type="radio" name="difficulty" id="expert" value="expert">උගුල</label>
+                </div>
+                <div class="col-xs-12 text-center" style="padding-top: 10px;">
                     <button class="btn btn-primary btn-lg startButton">ආරම්භය</button>
                 </div>
             </div>
+            <hr />
         </div>
         <div class="container-fluid" id="game">
             <div class="row" style="border-radius: 4px; height: 30px; margin-top: 15px; background-color: #1b6d85; margin-left: 20px; margin-right: 20px; color: white; font-size: 18px; font-weight: bold;">
@@ -78,16 +86,29 @@
                 <div class="col-xs-6 text-right"><span>ලකුණු:&nbsp;&nbsp;</span><span id="score">0</span></div>
             </div>
 
-            <div class="row" style="height: 150px; margin-top: 5px;">
+            <div class="row" style="margin-top: 5px;">
                 <div class="col-xs-12 text-center"><h1 id="currentWord">5</h1></div>
                 <div class="col-xs-12">
                     <textarea id="type-here" style="font-size: 26px !important; font-weight: bold !important;" class="form-control" rows="1"></textarea>
+                    <div id="resultHolder" style="display: none; text-align: center; font-size: 16px; color: white; height: 80px; padding: 10px 5px; line-height: 2;">
+                        <span id="resultOfGame"></span> <br/>
+                        ලකුණු:<span id="spanScore" style="color: black;">732</span>
+                        කාලය: <span id="spanTime" style="color: black;">53.74</span>
+                        ක්ෂමතාව: <span id="spanEfficency" style="color: black;">71.54%</span>
+                        විනාඩි/වචන: <span id="spanWPM" style="color: black;">9</span>
+                    </div>
                 </div>
             </div>
 
-            <div id='infoPanel' class="alert alert-danger text-center bold" role="alert" style="font-weight: bold">ඉහල වචනය ඉක්මනින් ටයිප් කරන්න</div>
-            <div id='replayPanel' class="alert alert-info text-center bold" role="alert" style="font-weight: bold; display: none;">
-                <button class="btn btn-primary btn-lg startButton">නැවත කරමු</button>
+            <div class="row">
+                <div class="col-xs-1">&nbsp;</div>
+                <div class="col-xs-10">
+                    <div id='infoPanel' class="alert alert-danger text-center bold" role="alert" style="font-weight: bold; padding: 2px; margin-bottom: 5px;"></div>
+                    <div id='replayPanel' class="alert alert-info text-center bold" role="alert" style="font-weight: bold; display: none;">
+                        <button class="btn btn-primary btn-lg startButton">නැවත කරමු</button>
+                    </div>
+                </div>
+                <div class="col-xs-1">&nbsp;</div>
             </div>
 
             <pre id="debug" style="display: none;"></pre>
@@ -99,6 +120,7 @@
                             <th>ප්‍රයත්නය</th>
                             <th>කාලය (තත්පර)</th>
                             <th>ලකුණු</th>
+                            <th>හරි/වැරදි</th>
                         </tr>
                     </thead>
                     <tbody id="history"></tbody>
@@ -185,10 +207,18 @@
             var wordScoreBegin = 0;
             var wordStart = 0.0;
             var wordStop = 0.0;
+            var changeWord = false;
+            var keyPressCount = 0;
+            var cumulativeKeyPress = 0;
+            var eraseCount = 0;
+            var cumulativeEraseCount = 0;
+            var correctCount = 0;
+            var cumulativeCorrectCount = 0;
+            var incorrectCount = 0;
+            var cumulativeIncorrectCount = 0;
 
             var wordList = ["අම්මා", "මගුල් කෑම", "රැකියාව", "අලුත් අවුරුද්ද", "මිතුරා", "ජනාවාස", "සවාරිය", "ජනාධිපතිතුමා", "පියතුමා", "සිරිත් විරිත්"];
-
-            var currentGameWordOrder;
+            var currentGameWordOrder = [];
 
             $(document).ready(function (e) {
                 $(".startButton").click(function (e) {
@@ -201,7 +231,9 @@
                     timerValue = 60.00;
                     timeout = 5;
                     currentWord = null;
-                    currentGameWordOrder = $.shuffle(wordList);
+                    currentGameWordOrder = wordList.slice();
+                    currentGameWordOrder = $.shuffle(currentGameWordOrder);
+                    console.log(currentGameWordOrder);
                     currentWordCodes = [];
                     wordScoreIndex = [];
                     wordScoreBegin = 0;
@@ -210,11 +242,14 @@
                     $("#timer").text(timerValue);
                     timeoutVal = setInterval(function () {
                         $("#currentWord").text(--timeout);
+                        $("#type-here").keyup(checkInput);
                         $("#infoPanel").show();
                         $("#replayPanel").hide();
                         if (timeout == 0) {
+                            $("#infoPanel").text("ඉහල වචනය ඉක්මනින් ටයිප් කරන්න");
                             clearInterval(timeoutVal);
                             timeoutVal = null;
+                            if (timeoutVal === null) timeoutVal = setInterval(reduceTime, 10);
                             showNextWord();
                         }
                     }, 1000);
@@ -266,87 +301,62 @@
                 return code;
             }
 
-            function knownCharCodeAt(str, idx) {
-                str += '';
-                var code,
-                    end = str.length;
-
-                var surrogatePairs = /[\u0D80-\u0DFF]/g;
-                while ((surrogatePairs.exec(str)) != null) {
-                    var li = surrogatePairs.lastIndex;
-                    if (li - 2 < idx) {
-                        idx++;
-                    }
-                    else {
-                        break;
-                    }
-                }
-
-                if (idx >= end || idx < 0) {
-                    return NaN;
-                }
-
-                code = str.charCodeAt(idx);
-
-                var hi, low;
-                if (0x0D80 <= code && code <= 0x0DFF) {
-                    hi = code;
-                    low = str.charCodeAt(idx + 1);
-                    // Go one further, since one of the "characters" is part of a surrogate pair
-                    return ((hi - 0x0D80) * 0x400) + (low - 0x0DFF) + 0x10000;
-                }
-                return code;
-            }
-
             function checkInput(e) {
                 var keyPress = e.which;
+                if (keyPress === 16) return true;
+                console.log(e);
                 var currentText = $("#type-here").val().trim();
                 var position = currentText.length - 1;
                 var currentCode = fixedCharCodeAt(currentText, currentText.length - 1);
-                if (keyPress === 8) {
-                    return true;
-                }
-/*
-                if (!isSinhalaLetter(currentChar)) {
-                    console.log('incorrect letter');
-                    return false;
-                }
-*/
                 var isCorrectChar = currentWordCodes[position] === currentCode;
                 var isFirstTime = (wordScoreIndex[position] == 0);
-                var isComplete = currentWord.length === currentText.length && currentWord === currentText
+                var isComplete = currentWord.length === currentText.length && currentWord === currentText;
+
+                keyPressCount++;
+                cumulativeKeyPress++;
+                if (keyPress === 8) {
+                    if (isCorrectChar && isFirstTime) {
+                        score -= 10; //we are going to take remove the score to prevent score hacking
+                    }
+                    eraseCount++;
+                    cumulativeEraseCount++;
+                    return true;
+                }
+
 
                 if (isCorrectChar) {
+                    correctCount++;
+                    cumulativeCorrectCount++;
                     if (isFirstTime) {
-                        score = score + 10;
+                        score += 10;
                     } else {
-                        score = score + 3;
+                        score += 3;
                     }
-
                     if (isComplete) {
                         wordStop = timerValue;
-                        putScore();
-                        if (wordList.length === 0) {
-                            clearInterval(timeoutVal);
-                            timeoutVal = null;
-                            showReplay();
-                            showWon();
+                        if (putScore(true)) {
+                            if (currentGameWordOrder.length === 0) {
+                                clearInterval(timeoutVal);
+                                $("#type-here").unbind('blur').unbind('keyup');
+                                timeoutVal = null;
+                                showReplay();
+                                showWon();
+                            } else {
+                                $("#score").text(score);
+                                return showNextWord();
+                            }
                         } else {
-                            showNextWord();
+                            return false;
                         }
-
                     }
                 } else {
-                    var debugInput = [];
-                    for (var i=0; i < currentText.length; i++) {
-                        debugInput[i] = fixedCharCodeAt(currentText, i);
-                    }
-                    $("#debug").html("Expected List: " + currentWordCodes.join("\n,") + "\n<br/>" + debugInput.join("\n,") + "   keyPress: " + keyPress +  ", currentCode:" + currentCode);
+                    incorrectCount++;
+                    cumulativeIncorrectCount++;
                     if (isFirstTime) {
-                        score = score - 5;
+                        score -= 5;
                         wordScoreIndex[position] = 1; //first mistake
                     } else {
-                        score = score - 4;
+                        score -= 4;
                     }
                 }
                 $("#score").text(score);
@@ -358,83 +368,117 @@
             }
 
             function hideReply() {
-                $("#infoPanel").show();
                 $("#replayPanel").hide();
-                $("#type-here").removeAttr("disabled");
-                $("#type-here").css("background-color", "white");
-                $("#type-here").css("text-align", "left");
-                $("#type-here").css("color", "black");
-                $("#type-here").css("font-size", "26px");
+                $("#resultHolder").hide();
+                $("#infoPanel").show();
+                $("#type-here").show();
             }
 
             function showWon() {
-                $("#type-here").attr("disabled","disabled");
-                $("#type-here").css("background-color", "#c7e597");
-                $("#type-here").css("text-align", "center");
-                $("#type-here").css("color", "white");
-                $("#type-here").css("font-size", "16px");
-                $("#type-here").val("ඔබ දිනුම්.... " + getScoreText());
+                $("#type-here").hide();
+                $("#resultHolder").css("background-color", "#c7e597").show();
+                $("#resultOfGame").text("ඔබ දිනුම්....");
+                setScoreText();
             }
             
             function showLost() {
-                $("#type-here").attr("disabled","disabled");
-                $("#type-here").css("background-color", "#e85167");
-                $("#type-here").css("text-align", "center");
-                $("#type-here").css("color", "white");
-                $("#type-here").css("font-size", "16px");
-                $("#type-here").val("කාලය අවසන් " + getScoreText());
+                $("#type-here").hide();
+                $("#resultHolder").css("background-color", "#e85167").show();
+                $("#resultOfGame").text("කාලය අවසන්");
+                setScoreText(false);
             }
 
-            function getScoreText() {
-                return "ලකුණු: " + score + " කාලය: " + (60.0 - timerValue).toFixed(2);
+            function setScoreText(won) {
+                var wpm = (wordList.length - currentGameWordOrder.length);
+                if (!won) wpm--;
+                $("#spanScore").text(score);
+                $("#spanTime").text((60.0 - timerValue).toFixed(2));
+                $("#spanEfficency").text((cumulativeCorrectCount / cumulativeKeyPress * 100).toFixed(2));
+                $("#spanWPM").text(wpm);
             }
 
-            function putScore() {
+            function putScore(running) {
                 var timeTaken = wordStart - wordStop;
                 var wordScore = score - wordScoreBegin;
+                var fullScorePotential = (currentWord.length * 10);
+                var efficiency = (correctCount / keyPressCount * 100).toFixed(2);
+
                 var color = "danger";
-                if (timeTaken < 10) {
+                if (timeTaken < 5 && wordScore > (fullScorePotential * 0.80) && efficiency > 75.00 ) {
                     color = "success";
-                } else if (wordScore > 0) {
+                } else if (timeTaken > 5 && timeTaken < 10 && wordScore > parseInt(fullScorePotential * 0.50) && efficiency >= 50.00) {
                     color = "warning";
+                } else {
+                    color = "danger";
                 }
                 var tr = document.createElement("tr");
                 var tdWord = document.createElement("td");
                 var tdTime = document.createElement("td");
                 var tdScore = document.createElement("td");
+                var tdEffi = document.createElement("td");
                 tdWord.innerText = currentWord;
-                tdTime.innerText = timeTaken.toFixed(2);
-                tdScore.innerText = wordScore;
+
+                if (!running) {
+                    tdTime.innerText = wordStart.toFixed(2);
+                    score -= wordScore;
+                    $("#score").text(score);
+                    tdEffi.innerText = "-";
+                    tr.className = "danger";
+                } else {
+                    tdTime.innerText = timeTaken.toFixed(2);
+                    tdScore.innerText = wordScore + " / " + fullScorePotential;
+                    tdEffi.innerText = efficiency + "%";
+                    tr.className = color;
+                }
                 tr.appendChild(tdWord);
                 tr.appendChild(tdTime);
                 tr.appendChild(tdScore);
-                tr.className = color;
+                tr.appendChild(tdEffi);
                 $("#history").append(tr);
+
+                if (running && wordScore > currentWord.length * 10) {
+                    $("#type-here").unbind('blur').unbind('keyup');
+                    clearInterval(timeoutVal);
+                    console.log('something went wrong');
+                    return false;
+                }
+
+                keyPressCount = 0;
+                eraseCount = 0;
+                correctCount = 0;
+                incorrectCount = 0;
+                return true;
             }
 
             function showNextWord() {
-                $("#type-here").val("");
-                currentWord = wordList.pop();
                 currentWordCodes = [];
+                wordScoreIndex = [];
+                $("#type-here").unbind('keyup').unbind('blur');
+                currentWord = currentGameWordOrder.pop();
                 for (var i=0; i < currentWord.length; i++) {
                     currentWordCodes[i] = fixedCharCodeAt(currentWord, i);
+                    wordScoreIndex[i] = 0;
                 }
-                wordScoreIndex.fill(0, 0, currentWord.length);
                 $("#currentWord").text(currentWord);
-                $("#type-here").focus();
-                if (timeoutVal === null) timeoutVal = setInterval(reduceTime, 10);
                 wordStart = timerValue;
                 wordScoreBegin = score;
-                $("#type-here").keyup(checkInput);
-                $("#type-here").blur(function () {
+                $("#type-here").val('').focus().keyup(checkInput).blur(function () {
                     score = score - 100;
                     $("#score").text(score);
+
+                    $("#infoPanel").text("ලකුණු 100 කැපී ඇත (හොර)");
+                    setTimeout(function() {
+                        $("#infoPanel").text("ඉහල වචනය ඉක්මනින් ටයිප් කරන්න");
+                    }, 5000);
+
                 });
+                return true;
             }
 
             function reduceTime() {
                 timerValue = timerValue - 0.01;
                 if (timerValue <= 0.0) {
+                    putScore(false);
                     clearInterval(timeoutVal);
                     showReplay();
                     showLost();
