@@ -233,7 +233,7 @@
                     $("#game").show();
                     $("#history").html("");
                     difficulty = $('input[name=difficulty]:checked').val();
-                    console.log(difficulty);
+                    //console.log(difficulty);
                     hideReply();
                     score = 0;
                     timerValue = 60.00;
@@ -241,7 +241,7 @@
                     currentWord = null;
                     currentGameWordOrder = wordList[difficulty].slice();
                     currentGameWordOrder = $.shuffle(currentGameWordOrder);
-                    console.log(currentGameWordOrder);
+                    //console.log(currentGameWordOrder);
                     currentWordCodes = [];
                     wordScoreIndex = [];
                     wordScoreBegin = 0;
