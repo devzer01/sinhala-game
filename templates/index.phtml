@@ -36,7 +36,7 @@
         </style>
     </head>
     <body oncopy="return false" oncut="return false" onpaste="return false">
-        <label class="container-fluid" id="welcome">
+        <div class="container-fluid" id="welcome">
             <div class="row">
                 <div class="col-xs-12 text-right" style="padding-left: 0px; padding-right: 0px; background-image: url(img/bghead.png); background-position: left; background-repeat: no-repeat; ">
                     <h1 class="vtop">ආයුබෝවන්</h1>
@@ -69,7 +69,7 @@
             <hr />
             <div class="row" style="height: 100px; vertical-align: middle;">
                 <div class="col-xs-12 col-md-12 text-center" style="padding-top: 10px;">
-                    <label class="radio-inline"><input type="radio" name="difficulty" id="easy" value="easy">ලේසි</label>
+                    <label class="radio-inline"><input type="radio" name="difficulty" id="easy" value="easy" checked>ලේසි</label>
                     <label class="radio-inline"><input type="radio" name="difficulty" id="medium" value="medium">ෂෙප්</label>
                     <label class="radio-inline"><input type="radio" name="difficulty" id="hard" value="hard">අපෝ</label>
                     <label class="radio-inline"><input type="radio" name="difficulty" id="expert" value="expert">උගුල</label>
@@ -216,8 +216,14 @@
             var cumulativeCorrectCount = 0;
             var incorrectCount = 0;
             var cumulativeIncorrectCount = 0;
+            var difficulty;
 
-            var wordList = ["අම්මා", "මගුල් කෑම", "රැකියාව", "අලුත් අවුරුද්ද", "මිතුරා", "ජනාවාස", "සවාරිය", "ජනාධිපතිතුමා", "පියතුමා", "සිරිත් විරිත්"];
+            var wordList = {easy: [], medium: [], hard: [], expert: []};
+
+            wordList.easy = ["අම්මා", "මගුල් කෑම", "රැකියාව", "අලුත් අවුරුද්ද", "මිතුරා", "ජනාවාස", "සවාරිය", "ජනාධිපතිතුමා", "පියතුමා", "සිරිත් විරිත්"];
+            wordList.medium = ["සාමර්ථ්‍යය", "අතුරුබාධනය", "කෘෂිකර්මය", "භූගෝලවිද්‍යාව", "පාර්ලිමේන්තුව", "දේශපාලන විද්‍යාව", "මාර්ගදර්ශකයා", "ලංකාදීපය", "කථානායක", "සනීතිඥයා"];
+            wordList.hard = ["පෞරාණික", "නෂ්ටාවශේෂ", "ගරාවැටුණු ගොඩනැඟිලි ආදිය", "විශ්වවිද්‍යාලයයේ විද්‍යාංශය", "ඡ්‍යෝතිෂ්ශාස්ත්‍රය", "තාරකාශාස්ත්‍රය", "ගුවන් විදුලිය ප්‍රචාරය", "එකිනෙකා නසාගන්නා", "ලිංගික", "ආකාශයාත්‍රාව"];
+            wordList.expert = ["අපකීර්තියට පමුණවනවා", "සාක්ෂරතාව", "මුහුදු රාජාලියා", "විශ්වවිද්‍යාලය", "විශ්ව විද්‍යාලයයක මහාචාර්යවරයා", "මූලධර්මය", "කාබොහයිඩේ‍්‍රට් පරිවෘත්තිය", "මරණීය දණ්ඩනය", "අතන්ද්‍රතාව", "ශුක්‍රාණුව"];
             var currentGameWordOrder = [];
 
             $(document).ready(function (e) {
@@ -226,12 +232,14 @@
                     $("#help").hide();
                     $("#game").show();
                     $("#history").html("");
+                    difficulty = $('input[name=difficulty]:checked').val();
+                    console.log(difficulty);
                     hideReply();
                     score = 0;
                     timerValue = 60.00;
                     timeout = 5;
                     currentWord = null;
-                    currentGameWordOrder = wordList.slice();
+                    currentGameWordOrder = wordList[difficulty].slice();
                     currentGameWordOrder = $.shuffle(currentGameWordOrder);
                     console.log(currentGameWordOrder);
                     currentWordCodes = [];
@@ -304,7 +312,7 @@
             function checkInput(e) {
                 var keyPress = e.which;
                 if (keyPress === 16) return true;
-                console.log(e);
+                //console.log(e);
                 var currentText = $("#type-here").val().trim();
                 var position = currentText.length - 1;
                 var currentCode = fixedCharCodeAt(currentText, currentText.length - 1);
@@ -389,7 +397,7 @@
             }
 
             function setScoreText(won) {
-                var wpm = (wordList.length - currentGameWordOrder.length);
+                var wpm = (wordList[difficulty].length - currentGameWordOrder.length);
                 if (!won) wpm--;
                 $("#spanScore").text(score);
                 $("#spanTime").text((60.0 - timerValue).toFixed(2));
@@ -436,12 +444,12 @@
                 tr.appendChild(tdEffi);
                 $("#history").append(tr);
 
-                if (running && wordScore > currentWord.length * 10) {
+                /*if (running && wordScore > currentWord.length * 10) {
                     $("#type-here").unbind('blur').unbind('keyup');
                     clearInterval(timeoutVal);
                     console.log('something went wrong');
                     return false;
-                }
+                }*/
 
                 keyPressCount = 0;
                 eraseCount = 0;
