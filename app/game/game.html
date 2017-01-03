@@ -1,0 +1,47 @@
+<div class="container-fluid" id="game" ng-controller="GameCtrl">
+  <div class="row header" >
+    <div class="col-xs-6 text-left"><span>කාලය:&nbsp;&nbsp;</span><span id="timer">{{roundTimer | number:2}}</span></div>
+    <div class="col-xs-6 text-right"><span>ලකුණු:&nbsp;&nbsp;</span><span id="fullScore">{{score}}</span>&nbsp;&nbsp;<span id="wordScore">{{current.score}}</span></div>
+  </div>
+
+  <div class="row" style="margin-top: 5px;">
+    <div class="col-xs-12 text-center">
+      <h1 id="currentWord" ng-show="current.word && active">{{current.word}}</h1>
+      <h1 id="countdownTimer" ng-show="countdownCounter > 0" ng-bind="countdownCounter">5</h1>
+    </div>
+    <div class="col-xs-12" ng-show="current.word && active">
+      <div class="col-xs-12 text-center">
+        <input id="type-here" tabindex="1" class="form-control" ng-change="current.progress()" ng-keyup="current.handler($event)" ng-focus="current.word && active" ng-model="current.input"/> <br/>
+          <kbd ng-show="current.stat.key">{{current.stat.key}}</kbd>
+          <span class="plus" ng-show="current.stat.key">&nbsp;&nbsp; = &nbsp;&nbsp;</span>
+          <kbd ng-show="current.stat.hint[0][1]">⇧ Shift</kbd>
+          <span class="plus" ng-show="current.stat.hint[0][1]">&nbsp;+&nbsp;</span>
+          <kbd ng-show="current.stat.hint[0][2]">Alt</kbd>
+          <span class="plus" ng-show="current.stat.hint[0][2]">&nbsp;+&nbsp;</span>
+          <kbd ng-show="current.stat.hint[0][0]">{{current.stat.hint[0][0]}}</kbd>
+      </div>
+    </div>
+  </div>
+  <div class="row curvey" ng-show="gameResult" id="resultHolder" ng-class="{winner: req == correct, looser: req != correct}">
+    <div class="col-xs-12 text-center"><h1>{{result}}</h1></div>
+    <hr/>
+    <div class="col-xs-4">ලකුණු<br/>
+      <span style="color: black;">{{score}}</span>
+    </div>
+    <div class="col-xs-4">කාලය<br/>
+      <span style="color: black;">{{roundTime - roundTimer | number:2}}</span>
+    </div>
+    <div class="col-xs-4">ක්ෂමතාව<br/>
+      <span style="color: black;">{{ rate | number:2}}</span>
+    </div>
+  </div>
+  <hr/>
+  <div class="row"  ng-show="gameResult">
+    <div class="col-xs-1">&nbsp;</div>
+    <div class="col-xs-10 text-center">
+        <button class="btn btn-primary btn-lg" ng-click="start()">නැවත කරමු</button>
+      </div>
+    <div class="col-xs-1">&nbsp;</div>
+  </div>
+  <hr/>
+</div>

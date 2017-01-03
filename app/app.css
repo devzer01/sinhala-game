@@ -1,0 +1,48 @@
+/* app css stylesheet */
+kbd {
+  height: 50px; font-size: 26px !important; font-weight: bold !important;
+  padding: 0.1em 0.3em;
+}
+
+#type-here {
+  height: 50px; font-size: 26px !important; font-weight: bold !important;
+  text-align: center;
+}
+
+#resultHolder div {
+  text-align: center;
+  font-size: 16px; color: white; padding: 10px 5px; line-height: 1.1;
+}
+
+#resultHolder span {
+  font-size: 26px; font-weight: bold;
+}
+
+.plus {
+  font-size: 26px; font-weight: bold;
+}
+
+.winner {
+  background-color: #5cb85c;
+}
+
+.looser {
+  background-color: #c7254e;
+}
+
+.header {
+  height: 30px; margin-top: 15px; background-color: #1b6d85;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 4px;
+}
+
+body {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.curvey {
+  border-radius: 4px;
+}

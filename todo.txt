@@ -1,0 +1,15 @@
+<pre id="debug" style="display: none;"></pre>
+  <h4 style="border-bottom: gray 1px solid;">ලකුනු පුවරැව</h4>
+  <div class="table-responsive">
+    <table class="table table-stripe table-bordered" id="historyTable">
+      <thead>
+      <tr>
+        <th>ප්‍රයත්නය</th>
+        <th>කාලය (තත්පර)</th>
+        <th>ලකුණු</th>
+        <th>හරි/වැරදි</th>
+      </tr>
+      </thead>
+      <tbody id="history"></tbody>
+    </table>
+  </div>
