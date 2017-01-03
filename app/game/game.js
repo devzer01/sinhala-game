@@ -95,6 +95,10 @@ angular.module('com.github.devzer01.Training.game', ['ngRoute', 'com.github.devz
     .controller('GameCtrl', ['$scope', '$interval', 'com.github.devzer01.Training.gamecore', '$window',
         function ($scope, $interval, gameCore, $window) {
 
+            $scope.difficulty = gameCore.level;;
+
+            $scope.levels = gameCore.levels;
+
             angular.element(document).ready(function () {
                 $scope.start();
             });
@@ -112,8 +116,14 @@ angular.module('com.github.devzer01.Training.game', ['ngRoute', 'com.github.devz
                         stop = undefined;
                         return $scope.gameStop();
                     }
+                    $window.document.getElementById("type-here").focus();
                     $scope.roundTimer -= 0.01;
                 }, 10);
+            };
+
+            $scope.setLevel = function (v) {
+                $scope.difficulty = v;
+                gameCore.level = v;
             };
 
             var countdown;
@@ -154,8 +164,7 @@ angular.module('com.github.devzer01.Training.game', ['ngRoute', 'com.github.devz
 
             $scope.getNextWord = function () {
                 $scope.current.init($scope.gameWords.pop());
-                console.log($scope.gameWords);
-                $window.document.getElementById("type-here").focus();
+                //console.log($scope.gameWords);
             };
 
             $scope.reset = function() {
