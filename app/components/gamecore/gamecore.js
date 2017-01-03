@@ -7,9 +7,9 @@ angular.module('com.github.devzer01.Training.gamecore', [])
 
         var wordList = {};
         wordList.constant = "ටවරමඩබඅජඩඉපලගඑහමසදචනකතව".split("");
-        wordList.vowels = "අආඇඈඉඊඋඋ‍ෳඑඔඕ".split("");
+        wordList.vowels = ["අ","ආ","ඇ","ඈ","ඉ","ඊ","උ","\u0D8C","එ","ඔ","ඕ"];
         wordList.foo = ["ඨ්", "ඨ", "ළු", "ඛ", "ඊ", "ඟ"];
-        wordList.testx = ["න"];
+        wordList.testx = ["ආ", "ඇ", "ඈ"];
         wordList.easy = ["අම්මා", "මගුල් කෑම", "රැකියාව", "අලුත් අවුරුද්ද", "මිතුරා", "ජනාවාස", "සවාරිය", "ජනාධිපතිතුමා", "පියතුමා", "සිරිත් විරිත්"];
 
 //wordList.medium = ["සාමර්ථ්‍යය", "අතුරුබාධනය", "කෘෂිකර්මය", "භූගෝලවිද්‍යාව", "පාර්ලිමේන්තුව", "දේශපාලන විද්‍යාව", "මාර්ගදර්ශකයා", "ලංකාදීපය", "කථානායක", "සනීතිඥයා"];
@@ -24,6 +24,7 @@ angular.module('com.github.devzer01.Training.gamecore', [])
               "easy": "වචන"
           },
           getWordList: function () {
+              //return shuffleArray(wordList.testx.slice());
               return shuffleArray(wordList[this.level].slice());
           }
           };

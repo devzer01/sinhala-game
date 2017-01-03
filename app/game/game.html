@@ -6,12 +6,12 @@
 
   <div class="row" style="margin-top: 5px;">
     <div class="col-xs-12 text-center">
-      <h1 id="currentWord" ng-show="current.word && active">{{current.word}}</h1>
+      <h1 id="currentWord" ng-show="current.display && active">{{current.display}}</h1>
       <h1 id="countdownTimer" ng-show="countdownCounter > 0" ng-bind="countdownCounter">5</h1>
     </div>
     <div class="col-xs-12" ng-show="current.word && active">
       <div class="col-xs-12 text-center">
-        <input id="type-here" tabindex="1" class="form-control" ng-change="current.progress()" ng-keyup="current.handler($event)" ng-focus="current.word && active" ng-model="current.input"/> <br/>
+        <input id="type-here" tabindex="1" class="form-control" ng-keyup="current.handler($event)" ng-focus="current.display && active"/> <br/>
           <kbd ng-show="current.stat.key">{{current.stat.key}}</kbd>
           <span class="plus" ng-show="current.stat.key">&nbsp;&nbsp; = &nbsp;&nbsp;</span>
           <kbd ng-show="current.stat.hint[0][1]">⇧ Shift</kbd>

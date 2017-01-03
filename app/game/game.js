@@ -80,8 +80,8 @@ var sinhala = {
     3548: [["f", false, false], ["d", false, false]],
     3549: [["f", false, false], ["d", false, false], ["a", false, false]],
     3550: [["f", false, false], ["d", true, false]],
-    3551: [["d", true, false]],
-    3571: [["a", true, false]],
+    3551: [["a", true, false]],
+    3571: [["d", true, false]],
     3570: [["d", true, false], ["d", true, false]]};
 
 angular.module('com.github.devzer01.Training.game', ['ngRoute', 'com.github.devzer01.Training.gamecore'])
@@ -102,9 +102,11 @@ angular.module('com.github.devzer01.Training.game', ['ngRoute', 'com.github.devz
             var stop;
             $scope.gameStart = function() {
                 if ( angular.isDefined(stop) ) return;
-                $scope.active = true;
+                if (!$scope.active) {
+                    $scope.active = true;
+                    $scope.getNextWord(); //යැරටැරට
+                }
                 stop = $interval(function() {
-                    $window.document.getElementById("type-here").focus();
                     if ($scope.roundTimer <= 0.01 || $scope.active === false) {
                         $interval.cancel(stop);
                         stop = undefined;
@@ -119,26 +121,19 @@ angular.module('com.github.devzer01.Training.game', ['ngRoute', 'com.github.devz
                 if ( angular.isDefined(countdown) ) return;
                 countdown = $interval(function() {
                     $scope.countdownCounter -= 1;
+                    if ($scope.countdownCounter === 0) {
+                        $interval.cancel(countdown);
+                        countdown = undefined;
+                        $scope.gameStart();
+                    }
                 }, 1000);
             };
-
-            $scope.$watch(function () {
-                return $scope.countdownCounter;
-            }, function (nv, ov) {
-                if (nv == 0 && angular.isDefined(countdown)) {
-                    $interval.cancel(countdown);
-                    countdown = undefined;
-                    $scope.getNextWord();
-                    $scope.gameStart();
-                }
-            });
 
             $scope.gameStop = function () {
                 $scope.active = false;
                 if ($scope.req !== $scope.correct) {
                     $scope.result = "පැරදි";
                 }
-
 
                 if ($scope.progress.length === 0) {
                     $scope.rate = 0;
@@ -159,6 +154,8 @@ angular.module('com.github.devzer01.Training.game', ['ngRoute', 'com.github.devz
 
             $scope.getNextWord = function () {
                 $scope.current.init($scope.gameWords.pop());
+                console.log($scope.gameWords);
+                $window.document.getElementById("type-here").focus();
             };
 
             $scope.reset = function() {
@@ -181,6 +178,8 @@ angular.module('com.github.devzer01.Training.game', ['ngRoute', 'com.github.devz
 
             $scope.stop = function () {
                 if (!$scope.active) return;
+                $interval.cancel(stop);
+                stop = undefined;
                 $scope.active = false;
                 $scope.gameStop();
             };
@@ -200,6 +199,7 @@ angular.module('com.github.devzer01.Training.game', ['ngRoute', 'com.github.devz
                 codes: [],
                 char: [],
                 word: null,
+                display: null,
                 input: null,
                 _length: 0,
                 index: -1,
@@ -208,10 +208,35 @@ angular.module('com.github.devzer01.Training.game', ['ngRoute', 'com.github.devz
                     return this.char[this.index + 1];
                 },
                 init: function (word) {
-                    this.word = word;
                     this.input = null;
+                    $window.document.getElementById("type-here").value = "";
+                    this.display = word;
                     this.score = 0;
                     this.code = 0;
+
+
+                    var filter = {
+                        3462: ["අ", "ා"],
+                        3463: ["අ" , "ැ"],
+                        3464: ["අ", "ෑ"],
+                        3477: ["ඔ", "්"],
+                        3468: ["උ", "\u0DDF"]
+                    };
+
+                    var k = Object.keys(filter);
+                    for (var _k = 0; _k < k.length; _k++) {
+                        var _replace = filter[k[_k]];
+                        var _idx = parseInt(k[_k]);
+                        var _rep = getCodeArray(word).indexOf(_idx);
+                        while (_rep >= 0) {
+                            var letters = word.split("");
+                            letters.splice(_rep, 1, _replace[0], _replace[1]);
+                            word = letters.join("");
+                            _rep = getCodeArray(word).indexOf(_idx);
+                        }
+                    }
+                    console.log(word);
+                    this.word = word;
                     this.codes = getCodeArray(word);
                     this.char = this._setCharArray();
                     this.stat = this.char[0];
@@ -220,12 +245,25 @@ angular.module('com.github.devzer01.Training.game', ['ngRoute', 'com.github.devz
                 _setCharArray: function () {
                     var _temp = [];
                     for (var i=0; i < this.word.length; i++) {
-                        _temp[i] = {index: i, hint:  sinhala[this.codes[i]],answered: false, first: true, score: 0, counter: 0, expected: this.codes[i], history: [], key: this.word[i], code: 0};
+                        var _code = this.codes[i];
+                        _temp[i] = ({
+                            index: i,
+                            hint: sinhala[this.codes[i]],
+                            answered: false,
+                            first: true,
+                            score: 0,
+                            counter: 0,
+                            expected: _code,
+                            history: [],
+                            key: this.word[i],
+                            code: 0
+                        });
                     }
                     return _temp;
                 },
                 progress: function () {
-                    if (this.input.length === 0 || this.input.length > this.word.length) return false;
+                    this.input = $window.document.getElementById("type-here").value;
+                    if (this.input.length === 0 || this.input.length > this.word.length) return true;
                     this.index = this.input.length - 1;
                     if (this.stat.index !== this.index) {
                         this.char[this.stat.index] = Object.assign({}, this.stat);
@@ -261,22 +299,14 @@ angular.module('com.github.devzer01.Training.game', ['ngRoute', 'com.github.devz
 
                 },
                 handler: function (e) {
-                    if (this.input === null) {
-                        //console.log(e);
-                    }
-                    if (e.keyCode === undefined) {
-                        //we are using google input tools
-                        return;
-                    }
-                    if (ignoreKeyCodes.indexOf(e.keyCode) != -1) {
-                        return true;
-                    }
+                    console.log($window.document.getElementById("type-here").value);
                     this.keyCode = e.keyCode;
-
+                    this.progress();
                 }, 
                 complete: function () {
                     var done = (this.word.length === this.input.length && this.word === this.input);
-                    if (!done) return false;
+                    var done2 = (this.display.length === this.input.length && this.display === this.input);
+                    if (!done && !done2) return false;
 
                     $scope.correct++;
                     $scope.score = $scope.current.score;
