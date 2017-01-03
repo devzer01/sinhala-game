@@ -6,7 +6,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>My AngularJS App</title>
+  <title>{{ 'APPNAME' | translate}}</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
@@ -33,7 +33,7 @@
 
 
   <footer class="footer text-center">
-       කාන්ඩය:<span app-version></span> &nbsp;&nbsp;&nbsp;&nbsp; 2017 ඕල් රයිට්ස් රිසව්ඩ් - පිටුව සහ අපි
+       {{VERSION | translate}}:<span app-version></span> &nbsp;&nbsp;&nbsp;&nbsp; 2017 {{ COPYRIGHT | translate}}
   </footer>
   <!-- In production use:
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
@@ -42,6 +42,7 @@
   <script src="bower_components/angular-route/angular-route.js"></script>
   <script src="bower_components/angulartics/dist/angulartics.min.js"></script>
   <script src="bower_components/angulartics-google-analytics/dist/angulartics-ga.min.js"></script>
+  <script src="bower_components/angular-translate/angular-translate.js"></script>
   <script src="app.js"></script>
   <script src="welcome/welcome.js"></script>
   <script src="help/help.js"></script>
