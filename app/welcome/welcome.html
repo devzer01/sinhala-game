@@ -34,7 +34,7 @@
             <label class="radio-inline" ng-repeat="(key, value) in levels" for="{{key}}"><input type="radio" ng-click="setLevel(key)" ng-model="difficulty" name="level" id="{{key}}" ng-value="value" value="{{key}}">{{value}}</label>
         </div>
         <div class="col-xs-12 text-center" style="padding-top: 10px;">
-            <button class="btn btn-primary btn-lg startButton" ng-click="game()">ආරම්භය</button>
+            <button class="btn btn-primary btn-lg startButton" ng-click="game()" analytics-on="click" analytics-event="gameStart">ආරම්භය</button>
         </div>
     </div>
     <hr />

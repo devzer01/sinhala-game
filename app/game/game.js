@@ -92,8 +92,8 @@ angular.module('com.github.devzer01.Training.game', ['ngRoute', 'com.github.devz
       });
     }])
 
-    .controller('GameCtrl', ['$scope', '$interval', 'com.github.devzer01.Training.gamecore', '$window',
-        function ($scope, $interval, gameCore, $window) {
+    .controller('GameCtrl', ['$scope', '$interval', 'com.github.devzer01.Training.gamecore', '$window', '$analytics',
+        function ($scope, $interval, gameCore, $window, $analytics) {
 
             $scope.difficulty = gameCore.level;;
 
@@ -101,6 +101,9 @@ angular.module('com.github.devzer01.Training.game', ['ngRoute', 'com.github.devz
 
             angular.element(document).ready(function () {
                 $scope.start();
+                $analytics.pageTrack('/games');
+                $analytics.eventTrack('firstTry', {  category: gameCore.level, label: 'level' });
+                //$analytics.eventTrack('eventName', {  category: 'category', label: 'label' });
             });
 
             var stop;
@@ -145,6 +148,8 @@ angular.module('com.github.devzer01.Training.game', ['ngRoute', 'com.github.devz
                     $scope.result = "පැරදි";
                 }
 
+                $analytics.eventTrack('stop');
+
                 if ($scope.progress.length === 0) {
                     $scope.rate = 0;
                 } else {
@@ -168,6 +173,7 @@ angular.module('com.github.devzer01.Training.game', ['ngRoute', 'com.github.devz
             };
 
             $scope.reset = function() {
+                $analytics.eventTrack('resetTry', {  category: gameCore.level, label: 'level' });
                 $scope.score = 0;
                 $scope.roundTimer = $scope.roundTime;
                 $scope.countdownCounter = 2;
@@ -244,7 +250,7 @@ angular.module('com.github.devzer01.Training.game', ['ngRoute', 'com.github.devz
                             _rep = getCodeArray(word).indexOf(_idx);
                         }
                     }
-                    console.log(word);
+                    //console.log(word);
                     this.word = word;
                     this.codes = getCodeArray(word);
                     this.char = this._setCharArray();
@@ -308,8 +314,6 @@ angular.module('com.github.devzer01.Training.game', ['ngRoute', 'com.github.devz
 
                 },
                 handler: function (e) {
-                    console.log($window.document.getElementById("type-here").value);
-                    this.keyCode = e.keyCode;
                     this.progress();
                 }, 
                 complete: function () {
@@ -318,7 +322,8 @@ angular.module('com.github.devzer01.Training.game', ['ngRoute', 'com.github.devz
                     if (!done && !done2) return false;
 
                     $scope.correct++;
-                    $scope.score = $scope.current.score;
+                    $scope.score += $scope.current.score;
+                    $scope.current.score = 0;
                     $scope.progress[$scope.counter++] = Object.assign({}, $scope.current);
                     if ($scope.gameWords.length !== 0) {
                         $scope.getNextWord();
