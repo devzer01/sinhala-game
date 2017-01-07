@@ -1,15 +1,20 @@
 'use strict';
 
-angular.module('com.github.devzer01.Training.welcome', ['ngRoute', 'com.github.devzer01.Training.gamecore'])
+angular.module('com.github.devzer01.Training.welcome', ['ngRoute', 'com.github.devzer01.Training.gamecore', 'pascalprecht.translate'])
 
 .config(['$routeProvider', 'com.github.devzer01.Training.gamecoreProvider', function($routeProvider, gamecoreProvider) {
-  $routeProvider.when('/welcome', {
-    templateUrl: 'welcome/welcome.html',
-    controller: 'WelcomeCtrl'
-  });
+
+    $routeProvider.when('/welcome', {
+        templateUrl: 'welcome/welcome.html',
+        controller: 'WelcomeCtrl'
+    });
+
+
+
 }])
 
-    .controller('WelcomeCtrl', ['$scope' , '$location', 'com.github.devzer01.Training.gamecore', function ($scope, $location, gamecore) {
+    .controller('WelcomeCtrl', ['$scope' , '$location', 'com.github.devzer01.Training.gamecore', '$translate', function ($scope, $location, gamecore, $translate) {
+
 
         $scope.difficulty = gamecore.defaultLevel;
 
@@ -20,6 +25,7 @@ angular.module('com.github.devzer01.Training.welcome', ['ngRoute', 'com.github.d
         };
 
         $scope.setLevel = function (v) {
+            console.log($translate.uses());
             $scope.difficulty = v;
             gamecore.level = v;
         };

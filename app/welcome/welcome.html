@@ -1,30 +1,30 @@
 <div class="container-fluid" id="welcome" ng-controller="WelcomeCtrl">
     <div class="row">
         <div class="col-xs-12 text-right" style="padding-left: 0px; padding-right: 0px; background-image: url(image/bghead.png); background-position: left; background-repeat: no-repeat; ">
-            <h1 class="vtop">ආයුබෝවන්</h1>
+            <h1 class="vtop" translate>GREETINGS</h1>
         </div>
         <div class="col-xs-12 text-right">
-            <h1 style="margin-top: 0; margin-bottom: 0;"><small>විනෝදාත්මක අධ්‍යාපනය</small></h1>
+            <h1 style="margin-top: 0; margin-bottom: 0;"><small translate>TAGLINE</small></h1>
         </div>
     </div>
     <hr />
     <div class="row">
-        <div class="col-xs-12 col-sm-6 col-md-6 text-center small vcenter">සිංහල යතුරු පුවරුවක් සඳහා අව්‍ශ්‍ය උපදෙස් බොත්තම කොටන්න</div>
+        <div class="col-xs-12 col-sm-6 col-md-6 text-center small vcenter" translate>HELPTITLE</div>
         <div class="visible-xs">&nbsp;</div>
         <div class="col-xs-12 col-sm-6 col-md-6 text-center">
-            <button id="showHelp" class="btn btn-default btn-info" ng-click="help()">යතුරු ලියන උපදෙස්</button>
+            <button id="showHelp" class="btn btn-default btn-info" ng-click="help()" translate>HELP</button>
         </div>
     </div>
     <hr />
     <div class="row" style="height: 130px;">
         <div class="col-xs-12">
-            <h4 class="text-left" style="color: green;"><strong>තරග වදින හැටි</strong></h4>
+            <h4 class="text-left" style="color: green;"><strong translate>HOWTOTITLE</strong></h4>
         </div>
         <div class="col-xs-12">
             <ul style="line-height: 30px;">
-                <li>ආරම්භය කොටන්න</li>
-                <li>දකින වචනය ටයිප් කරන්න</li>
-                <li>ශුද්ධ සිංහල පමණි (ෆොනෙටික් භාවිතා නොකරන්න)</li>
+                <li translate>STEP1</li>
+                <li translate>STEP2</li>
+                <li translate>STEP3</li>
             </ul>
         </div>
     </div>
@@ -34,7 +34,7 @@
             <label class="radio-inline" ng-repeat="(key, value) in levels" for="{{key}}"><input type="radio" ng-click="setLevel(key)" ng-model="difficulty" name="level" id="{{key}}" ng-value="value" value="{{key}}">{{value}}</label>
         </div>
         <div class="col-xs-12 text-center" style="padding-top: 10px;">
-            <button class="btn btn-primary btn-lg startButton" ng-click="game()" analytics-on="click" analytics-event="gameStart">ආරම්භය</button>
+            <button class="btn btn-primary btn-lg startButton" ng-click="game()" translate analytics-on="click" analytics-event="gameStart">START</button>
         </div>
     </div>
     <hr />
