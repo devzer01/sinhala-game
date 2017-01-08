@@ -37,7 +37,7 @@ core.service('$coreService',['$interval', '$window', function ($interval, $windo
 
         this.setup = function ($data, $filter, $keyboard) {
             this.data = $data;
-            this.game = shuffleArray(this.data).slice(0, 10);
+            this.game = this.shuffle(this.data).slice(0, 10);
             this.req = 10;
             this.filter = $filter;
             this.keyboard = $keyboard;
@@ -61,6 +61,7 @@ core.service('$coreService',['$interval', '$window', function ($interval, $windo
 
         this.reset = function() {
             //$analytics.eventTrack('resetTry', {  category: gameCore.level, label: 'level' });
+            $window.document.getElementById("type-here").value = "";
             this.active = false;
             this.score = 0;
             this.countdownCounter = 2;
@@ -70,7 +71,7 @@ core.service('$coreService',['$interval', '$window', function ($interval, $windo
             this.req = 0;
             this.progress = [];
             this.counter = 0;
-            this.game = shuffleArray(this.data).slice(0, 10);
+            this.game = this.shuffle(this.data).slice(0, 10);
         };
 
         this.current = {
@@ -103,17 +104,17 @@ core.service('$coreService',['$interval', '$window', function ($interval, $windo
             for (var _k = 0; _k < k.length; _k++) {
                 var _replace = this.filter[k[_k]];
                 var _idx = parseInt(k[_k]);
-                var _rep = getCodeArray(word).indexOf(_idx);
+                var _rep = this.getCodeArray(word).indexOf(_idx);
                 while (_rep >= 0) {
                     var letters = word.split("");
                     letters.splice(_rep, 1, _replace[0], _replace[1]);
                     word = letters.join("");
-                    _rep = getCodeArray(word).indexOf(_idx);
+                    _rep = this.getCodeArray(word).indexOf(_idx);
                 }
             }
             //console.log(word);
             this.current.word = word;
-            this.current.codes = getCodeArray(word);
+            this.current.codes = this.getCodeArray(word);
             this.current.char = this._setCharArray();
             this.current.stat = this.current.char[0];
             this.current.hint = this.current.stat.hint;
@@ -197,68 +198,44 @@ core.service('$coreService',['$interval', '$window', function ($interval, $windo
             }
         };
 
+        this.shuffle = function (arr) {
+            var m = arr.length, t, i;
+
+            while(m) {
+                i = Math.floor(Math.random() * m--);
+                t = arr[m];
+                arr[m] = arr[i];
+                arr[i] = t;
+            }
+
+            return arr;
+        };
+
+        this.getCodeArray = function(word) {
+            var tempArray = [];
+            for (var i=0; i < word.length; i++) {
+                tempArray[i] = this.fixedCharCodeAt(word, i);
+            }
+            return tempArray;
+        };
+
+        this.fixedCharCodeAt = function(str, idx) {
+            idx = idx || 0;
+            var code = str.charCodeAt(idx);
+            var hi, low;
+
+            if (0xD800 <= code && code <= 0xDBFF) {
+                hi = code;
+                low = str.charCodeAt(idx + 1);
+                if (isNaN(low)) {
+                    throw 'High surrogate not followed by low surrogate in fixedCharCodeAt()';
+                }
+                return ((hi - 0xD800) * 0x400) + (low - 0xDC00) + 0x10000;
+            }
+            if (0xDC00 <= code && code <= 0xDFFF) { // Low surrogate
+                return false;
+            }
+            return code;
+        };
 
     }]);
-
-
-var shuffleArray = function(array) {
-    var m = array.length, t, i;
-
-    // While there remain elements to shuffle
-    while (m) {
-        // Pick a remaining element…
-        i = Math.floor(Math.random() * m--);
-
-        // And swap it with the current element.
-        t = array[m];
-        array[m] = array[i];
-        array[i] = t;
-    }
-
-    return array;
-};
-//constant
-
-var getCodeArray = function(word) {
-    var tempArray = [];
-    for (var i=0; i < word.length; i++) {
-        tempArray[i] = fixedCharCodeAt(word, i);
-    }
-    return tempArray;
-};
-
-var fixedCharCodeAtWithCode = function(code) {
-    var hi, low;
-
-    if (0xD800 <= code && code <= 0xDBFF) {
-        hi = code;
-        low = str.charCodeAt(idx + 1);
-        if (isNaN(low)) {
-            throw 'High surrogate not followed by low surrogate in fixedCharCodeAt()';
-        }
-        return ((hi - 0xD800) * 0x400) + (low - 0xDC00) + 0x10000;
-    }
-    if (0xDC00 <= code && code <= 0xDFFF) { // Low surrogate
-        return false;
-    }
-    return code;
-};
-
-var fixedCharCodeAt = function(str, idx) {
-    idx = idx || 0;
-    var code = str.charCodeAt(idx);
-    var hi, low;
-
-    if (0xD800 <= code && code <= 0xDBFF) {
-        hi = code;
-        low = str.charCodeAt(idx + 1);
-        if (isNaN(low)) {
-            throw 'High surrogate not followed by low surrogate in fixedCharCodeAt()';
-        }
-        return ((hi - 0xD800) * 0x400) + (low - 0xDC00) + 0x10000;
-    }
-    if (0xDC00 <= code && code <= 0xDFFF) { // Low surrogate
-        return false;
-    }
-    return code;
-};
