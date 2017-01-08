@@ -13,10 +13,18 @@ angular.module('com.github.devzer01.typeMaster.welcome', ['ngRoute', 'com.github
 
     .controller('WelcomeCtrl', ['$scope' , '$location', '$core', '$translate', '$window', function ($scope, $location, $core, $translate, $window) {
 
+        if ($core.pack === null) {
+            return $location.path('selection');
+        }
 
-        $scope.difficulty = 'easy'; //gamecore.defaultLevel;
 
-        $scope.levels = $core.levels;
+        $scope.pack = $core.pack;
+
+        var lng = $core.data[$core.pack];
+
+        $scope.difficulty = lng.defaultLevel;
+
+        $scope.levels =  lng.levels;
 
         $scope.isTh = ($translate.use() === "th_TH");
 

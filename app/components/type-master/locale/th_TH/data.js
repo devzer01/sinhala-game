@@ -1,9 +1,13 @@
 'use strict';
 
+var typeMaster = typeMaster || {module: {}};
+typeMaster['module']['th_TH'] = 'com.github.devzer01.typeMaster.core.data.thai';
 angular.module('com.github.devzer01.typeMaster.core.data.thai', ['com.github.devzer01.typeMaster.core.locale.thai'])
     .provider('thai', ['localeThProvider', function(typeMasterLocaleProvider) {
-    this.$get = function() {
-        return {
+        this.$get = {
+            locale: 'th_TH',
+            name: 'Basic Thai',
+            localName: 'ไทยพื้นฐาน',
             filter: typeMasterLocaleProvider.$get().filter,
             keyboard: typeMasterLocaleProvider.$get().keyboard,
             level: "constant",
@@ -67,9 +71,10 @@ angular.module('com.github.devzer01.typeMaster.core.data.thai', ['com.github.dev
                 'SCORE': 'คะแนน',
                 'PLAY_AGAIN': 'เล่นอีกครั้ง'
             }
-        }
-    }
+        };
 }]);
+
+
 
 //,"","","ไตรรงค์","","","","ธำมรงค์","","","","พระขรรค์","","พระองค์","","","ประสงค์","","","","สตางค์","","","","สร้างสรรค์","","พระสงฆ์","","นักปราชญ์
 //ประดิษฐ์     พระไชยเชษฐ์

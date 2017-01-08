@@ -1,19 +1,23 @@
 'use strict';
 
-angular.module('com.github.devzer01.typeMaster.core.data.sinhala', ['com.github.devzer01.typeMaster.core.locale.sinhala'])
-    .provider('sinhala', ['localeSiProvider', function(typeMasterLocaleProvider) {
+var typeMaster = typeMaster || {module: {}};
+typeMaster['module']['si_LK'] = 'com.github.devzer01.typeMaster.core.data.sinhala';
 
-    this.$get = function() {
-        return {
+angular.module('com.github.devzer01.typeMaster.core.data.sinhala', ['com.github.devzer01.typeMaster.core.locale.sinhala'])
+    .provider('sinhala', ['localeSiProvider',function(typeMasterLocaleProvider) {
+        this.$get = {
+            locale: 'si_LK',
+            name: 'Basic Sinhala',
+            localName: 'සරල සිංහල',
             filter: typeMasterLocaleProvider.$get().filter,
             keyboard: typeMasterLocaleProvider.$get().keyboard,
             level: "constant",
-                defaultLevel: "constant",
+            defaultLevel: "constant",
             levels: { "constant" : "ව්‍යංජන",  "vowels" : "ස්වර",  "easy": "වචන" },
             words: {
                 constant: "ටවරමඩබඅජඩඉපලගඑහමසදචනකතව".split(""),
-                    vowels: ["අ","ආ","ඇ","ඈ","ඉ","ඊ","උ","\u0D8C","එ","ඔ","ඕ"],
-                    easy: ["අම්මා", "මගුල් කෑම", "රැකියාව", "අලුත් අවුරුද්ද", "මිතුරා", "ජනාවාස", "සවාරිය", "ජනාධිපතිතුමා", "පියතුමා", "සිරිත් විරිත්"]
+                vowels: ["අ","ආ","ඇ","ඈ","ඉ","ඊ","උ","\u0D8C","එ","ඔ","ඕ"],
+                easy: ["අම්මා", "මගුල් කෑම", "රැකියාව", "අලුත් අවුරුද්ද", "මිතුරා", "ජනාවාස", "සවාරිය", "ජනාධිපතිතුමා", "පියතුමා", "සිරිත් විරිත්"]
             },
             translation: {
                 'VERSION': 'කාන්ඩය',
@@ -35,6 +39,5 @@ angular.module('com.github.devzer01.typeMaster.core.data.sinhala', ['com.github.
                 'WON': 'WON',
                 'PLAY_AGAIN': ''
             }
-        }
-    }
+        };
 }]);
