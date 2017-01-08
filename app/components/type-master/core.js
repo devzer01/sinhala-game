@@ -37,7 +37,7 @@ core.service('$coreService',['$interval', '$window', function ($interval, $windo
 
         this.setup = function ($data, $filter, $keyboard) {
             this.data = $data;
-            this.game = Array.slice(shuffleArray(this.data), 0, 10);
+            this.game = shuffleArray(this.data).slice(0, 10);
             this.req = 10;
             this.filter = $filter;
             this.keyboard = $keyboard;
@@ -70,7 +70,7 @@ core.service('$coreService',['$interval', '$window', function ($interval, $windo
             this.req = 0;
             this.progress = [];
             this.counter = 0;
-            this.game = Array.slice(shuffleArray(this.data), 0, 10);
+            this.game = shuffleArray(this.data).slice(0, 10);
         };
 
         this.current = {
