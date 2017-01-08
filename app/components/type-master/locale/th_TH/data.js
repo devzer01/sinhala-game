@@ -8,11 +8,12 @@ angular.module('com.github.devzer01.typeMaster.core.data.thai', ['com.github.dev
             keyboard: typeMasterLocaleProvider.$get().keyboard,
             level: "constant",
             defaultLevel: "constant",
-            levels: { "constant" : "พยัญชนะ",  "vowels" : "สระ",  "easy": "คำ" },
+            levels: { "constant" : "พยัญชนะ",  "vowels" : "สระ", "numbers": 'หมายเลข' , "easy": "คำ" },
             words: {
                 constant: "กขฃคฅฆงจฉชซฌญฎฏฐฑฒณ".split(""),
-                    vowels: ["අ","ආ","ඇ","ඈ","ඉ","ඊ","උ","\u0D8C","එ","ඔ","ඕ"],
-                    easy: ["แม่", "งานแต่งงาน", "อาชีพ", "ปีใหม่", "เพื่อน", "อารยธรรม", "การเดินทาง", "ประธานาธิบดี", "พ่อ", "ศุลกากร"]
+                vowels: ["\u0E30","\e0E31","\u0E32","\u0E33","\u0E34","\u0E35","\u0E36","\u0E37","\u0E38","\u0E39","\u0E3A", "\u0E40", "\u0E41", "\u0E42", "\u0E43", "\u0E44" ,"\u0E47"],
+                numbers: ["\u0E50", "\u0E51", "\u0E52", "\u0E53", "\u0E54", "\u0E55", "\u0E56", "\u0E57", "\u0E58", "\u0E59"],
+                easy: ["แม่", "งานแต่งงาน", "อาชีพ", "ปีใหม่", "เพื่อน", "อารยธรรม", "การเดินทาง", "ประธานาธิบดี", "พ่อ", "ศุลกากร"]
             },
             translation: {
                 'VERSION': 'รุ่น',
