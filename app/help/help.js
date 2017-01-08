@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('com.github.devzer01.Training.help', ['ngRoute'])
+angular.module('com.github.devzer01.typeMaster.help', ['ngRoute'])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/help', {

@@ -1,6 +1,6 @@
 'use strict';
 
-describe('com.github.devzer01.Training.version module', function() {
+describe('com.github.devzer01.typeMaster.version module', function() {
   beforeEach(module('myApp.version'));
 
   describe('interpolate filter', function() {

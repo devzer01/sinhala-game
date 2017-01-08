@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('com.github.devzer01.Training.version.interpolate-filter', [])
+angular.module('com.github.devzer01.typeMaster.version.interpolate-filter', [])
 
 .filter('interpolate', ['version', function(version) {
   return function(text) {

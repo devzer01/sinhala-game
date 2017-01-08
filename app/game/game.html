@@ -1,37 +1,37 @@
 <div class="container-fluid" id="game" ng-controller="GameCtrl">
   <div class="row header" >
-    <div class="col-xs-6 text-left"><span>කාලය:&nbsp;&nbsp;</span><span id="timer">{{roundTimer | number:2}}</span></div>
-    <div class="col-xs-6 text-right"><span>ලකුණු:&nbsp;&nbsp;</span><span id="fullScore">{{score}}</span>&nbsp;&nbsp;<span id="wordScore">{{current.score}}</span></div>
+    <div class="col-xs-6 text-left"><span translate>TIME</span>:<span id="timer">{{roundTimer | number:2}}</span></div>
+    <div class="col-xs-6 text-right"><span translate>SCORE</span>:<span id="fullScore">{{$coreService.score}}</span>&nbsp;&nbsp;<span id="wordScore">{{$coreService.current.score}}</span></div>
   </div>
 
   <div class="row" style="margin-top: 5px;">
     <div class="col-xs-12 text-center">
-      <h1 id="currentWord" ng-show="current.display && active">{{current.display}}</h1>
+      <h1 id="currentWord" ng-show="$coreService.current.display && $coreService.active">{{$coreService.current.display}}</h1>
       <h1 id="countdownTimer" ng-show="countdownCounter > 0" ng-bind="countdownCounter">5</h1>
     </div>
-    <div class="col-xs-12" ng-show="current.word && active">
+    <div class="col-xs-12" ng-show="$coreService.current.word && $coreService.active">
       <div class="col-xs-12 text-center">
-        <input id="type-here" tabindex="1" class="form-control" ng-keyup="current.handler($event)" ng-focus="current.display && active"/> <br/>
-          <kbd ng-show="current.stat.key">{{current.stat.key}}</kbd>
-          <span class="plus" ng-show="current.stat.key">&nbsp;&nbsp; = &nbsp;&nbsp;</span>
-          <kbd ng-show="current.stat.hint[0][1]">⇧ Shift</kbd>
-          <span class="plus" ng-show="current.stat.hint[0][1]">&nbsp;+&nbsp;</span>
-          <kbd ng-show="current.stat.hint[0][2]">Alt</kbd>
-          <span class="plus" ng-show="current.stat.hint[0][2]">&nbsp;+&nbsp;</span>
-          <kbd ng-show="current.stat.hint[0][0]">{{current.stat.hint[0][0]}}</kbd>
+        <input id="type-here" tabindex="1" class="form-control" ng-keyup="$coreService.handler($event)" ng-focus="$coreService.current.display && $coreService.active"/> <br/>
+          <kbd ng-show="$coreService.current.stat.key">{{$coreService.current.stat.key}}</kbd>
+          <span class="plus" ng-show="$coreService.current.stat.key">&nbsp;&nbsp; = &nbsp;&nbsp;</span>
+          <kbd ng-show="$coreService.current.stat.hint[0][1]">⇧ Shift</kbd>
+          <span class="plus" ng-show="$coreService.current.stat.hint[0][1]">&nbsp;+&nbsp;</span>
+          <kbd ng-show="$coreService.current.stat.hint[0][2]">Alt</kbd>
+          <span class="plus" ng-show="$coreService.current.stat.hint[0][2]">&nbsp;+&nbsp;</span>
+          <kbd ng-show="$coreService.current.stat.hint[0][0]">{{$coreService.current.stat.hint[0][0]}}</kbd>
       </div>
     </div>
   </div>
-  <div class="row curvey" ng-show="gameResult" id="resultHolder" ng-class="{winner: req == correct, looser: req != correct}">
+  <div class="row curvey" ng-show="gameResult" id="resultHolder" ng-class="{winner: $coreService.req == $coreService.correct, looser: $coreService.req != $coreService.correct}">
     <div class="col-xs-12 text-center"><h1>{{result}}</h1></div>
     <hr/>
-    <div class="col-xs-4">ලකුණු<br/>
-      <span style="color: black;">{{score}}</span>
+    <div class="col-xs-4"><span translate>SCORE</span><br/>
+      <span style="color: black;">{{$coreService.score}}</span>
     </div>
-    <div class="col-xs-4">කාලය<br/>
+    <div class="col-xs-4"><span translate>TIME</span><br/>
       <span style="color: black;">{{roundTime - roundTimer | number:2}}</span>
     </div>
-    <div class="col-xs-4">ක්ෂමතාව<br/>
+    <div class="col-xs-4"><span translate>EFFICIENCY</span><br/>
       <span style="color: black;">{{ rate | number:2}}</span>
     </div>
   </div>
@@ -42,7 +42,7 @@
         <div class="col-xs-12">
           <label class="radio-inline" ng-repeat="(key, value) in levels" for="{{key}}"><input type="radio" ng-click="setLevel(key)" ng-model="difficulty" name="level" id="{{key}}" ng-value="value" value="{{key}}">{{value}}</label>
         </div>
-        <button class="btn btn-primary btn-lg" ng-click="start()">නැවත කරමු</button>
+        <button class="btn btn-primary btn-lg" ng-click="start()" translate>PLAY_AGAIN</button>
       </div>
     <div class="col-xs-1">&nbsp;</div>
   </div>
