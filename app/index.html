@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html lang="en" ng-app="com.github.devzer01.Training" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html lang="en" ng-app="com.github.devzer01.Training" class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html lang="en" ng-app="com.github.devzer01.Training" class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html lang="en" ng-app="com.github.devzer01.Training" class="no-js"> <!--<![endif]-->
+<!--[if lt IE 7]>      <html lang="en" ng-app="com.github.devzer01.typeMaster" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="com.github.devzer01.typeMaster" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="com.github.devzer01.typeMaster" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" ng-app="com.github.devzer01.typeMaster" class="no-js"> <!--<![endif]-->
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -33,7 +33,7 @@
 
 
   <footer class="footer text-center">
-       {{VERSION | translate}}:<span app-version></span> &nbsp;&nbsp;&nbsp;&nbsp; 2017 {{ COPYRIGHT | translate}}
+       {{'VERSION' | translate}}:<span app-version></span> &nbsp;&nbsp;&nbsp;&nbsp; 2017 {{ 'COPYRIGHT' | translate}}
   </footer>
   <!-- In production use:
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
@@ -47,7 +47,11 @@
   <script src="welcome/welcome.js"></script>
   <script src="help/help.js"></script>
   <script src="game/game.js"></script>
-  <script src="components/gamecore/gamecore.js"></script>
+  <script src="components/type-master/core.js"></script>
+  <script src="components/type-master/locale/th_TH/data.js"></script>
+  <script src="components/type-master/locale/th_TH/locale.js"></script>
+  <script src="components/type-master/locale/si_LK/data.js"></script>
+  <script src="components/type-master/locale/si_LK/locale.js"></script>
   <script src="components/version/version.js"></script>
   <script src="components/version/version-directive.js"></script>
   <script src="components/version/interpolate-filter.js"></script>

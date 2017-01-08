@@ -1,37 +1,41 @@
 'use strict';
 
-angular.module('com.github.devzer01.Training.welcome', ['ngRoute', 'com.github.devzer01.Training.gamecore', 'pascalprecht.translate'])
+angular.module('com.github.devzer01.typeMaster.welcome', ['ngRoute', 'com.github.devzer01.typeMaster.core', 'pascalprecht.translate'])
 
-.config(['$routeProvider', 'com.github.devzer01.Training.gamecoreProvider', function($routeProvider, gamecoreProvider) {
+.config(['$routeProvider', '$coreProvider', function($routeProvider, $coreProvider) {
 
     $routeProvider.when('/welcome', {
         templateUrl: 'welcome/welcome.html',
         controller: 'WelcomeCtrl'
     });
 
-
-
 }])
 
-    .controller('WelcomeCtrl', ['$scope' , '$location', 'com.github.devzer01.Training.gamecore', '$translate', function ($scope, $location, gamecore, $translate) {
+    .controller('WelcomeCtrl', ['$scope' , '$location', '$core', '$translate', '$window', function ($scope, $location, $core, $translate, $window) {
 
 
-        $scope.difficulty = gamecore.defaultLevel;
+        $scope.difficulty = 'easy'; //gamecore.defaultLevel;
 
-        $scope.levels = gamecore.levels;
+        $scope.levels = $core.levels;
+
+        $scope.isTh = ($translate.use() === "th_TH");
 
         $scope.help = function () {
             $location.path('help');
         };
 
         $scope.setLevel = function (v) {
-            console.log($translate.uses());
+            $core.level = v;
             $scope.difficulty = v;
-            gamecore.level = v;
         };
 
         $scope.game = function () {
-            gamecore.level = $scope.difficulty;
+
+            if ($window.document.getElementById('GOOGLE_INPUT_CHEXT_FLAG') !== null) {
+                console.log("Google Input Tools Found");
+            }
+
+            $core.level = $scope.difficulty;
             $location.path('game');
         };
     }]);
