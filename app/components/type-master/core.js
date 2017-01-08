@@ -2,23 +2,40 @@
 
 var gameData = null;
 
-var core = angular.module('com.github.devzer01.typeMaster.core', ['com.github.devzer01.typeMaster.core.data.sinhala', 'com.github.devzer01.typeMaster.core.locale.sinhala',
-    'com.github.devzer01.typeMaster.core.data.thai', 'com.github.devzer01.typeMaster.core.locale.thai']);
+var core = angular.module('com.github.devzer01.typeMaster.core', []);
 
 core.config(function ($provide) {
-    $provide.provider("$core", ['sinhalaProvider', 'thaiProvider', function (sinhala, thai) {
+    $provide.provider("$core", ['$injector', function () {
 
-        this.data = {
-            'si_LK': sinhala.$get(),
-            'th_TH': thai.$get()
+        this.data = {};
+        
+        this.packs = [];
+
+        this.pack = null;
+
+        this.register = function ($locale, $data) {
+            this.data[$locale] = $data
+            this.packs.push($locale);
         };
 
         this.setConfig = function (data) {
             gameData = data;
         };
 
+        this.setPack = function ($pack) {
+            this.pack = $pack;
+        };
+
         this.$get = function () {
-            return gameData;
+            return {
+                gameData: gameData,
+                register: this.register,
+                setConfig: this.setConfig,
+                setPack: this.setPack,
+                packs: this.packs,
+                data: this.data,
+                pack: this.pack
+            };
         };
     }]);
 });

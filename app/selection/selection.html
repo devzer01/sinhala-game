@@ -1,0 +1,14 @@
+<div class="container-fluid" id="welcome" ng-controller="SelectionCtrl">
+    <div class="row">
+        <div class="col-xs-12 text-right" style="padding-left: 0px; padding-right: 0px; background-image: url(image/bghead.png); background-position: left; background-repeat: no-repeat; ">
+            <h1 class="vtop">Select Game Pack</h1>
+        </div>
+    </div>
+    <hr />
+    <div class="row" style="height: 100px; vertical-align: middle;">
+        <div class="col-xs-12 text-center" ng-repeat="(key, value) in packs" style="padding-top: 10px;">
+            <button class="btn btn-primary btn-lg startButton" ng-click="setPack(value.locale)" analytics-on="click" analytics-event="gameStart">{{value.name}}<br/><small>{{value.localName}}</small></button>
+        </div>
+    </div>
+    <hr />
+</div>
