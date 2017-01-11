@@ -80,8 +80,8 @@ angular.module('com.github.devzer01.typeMaster.game', ['ngRoute', 'com.github.de
             };
 
             $scope.gameStop = function () {
-                if (!$coreService.active) return;
-                $coreService.active = false;
+                if ($scope.gameResult) return;
+                $scope.gameResult = true;
                 if ($coreService.req !== $coreService.correct) {
                     $translate("LOOSE").then(function (result) {
                         $scope.result = result;
@@ -104,7 +104,7 @@ angular.module('com.github.devzer01.typeMaster.game', ['ngRoute', 'com.github.de
                     $scope.rate = ($coreService.progress.length / r) * 100;
                 }
                 facebookService.putScore($rootScope.user.id, $coreService.score);
-                $scope.gameResult = true;
+
             };
 
             $scope.gameResult = false;
