@@ -42,7 +42,7 @@ angular.module('com.github.devzer01.typeMaster.welcome', ['ngRoute', 'com.github
             if ($window.document.getElementById('GOOGLE_INPUT_CHEXT_FLAG') !== null) {
                 console.log("Google Input Tools Found");
             }
-
+            $translate.use($scope.pack);
             $core.level = $scope.difficulty;
             $location.path('game');
         };

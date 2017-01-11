@@ -22,7 +22,7 @@ if (typeof typeMaster !== "undefined" && typeof typeMaster.module !== "undefined
     }
 }
 
-angular.module('com.github.devzer01.typeMaster', $modules)
+var app = angular.module('com.github.devzer01.typeMaster', $modules)
     .config(['$locationProvider', '$routeProvider', '$compileProvider', '$analyticsProvider', '$translateProvider', '$coreProvider', '$injector',
     function($locationProvider, $routeProvider, $compileProvider, $analyticsProvider, $translateProvider, $coreProvider, $injector)
     {
@@ -41,5 +41,61 @@ angular.module('com.github.devzer01.typeMaster', $modules)
             $translateProvider.translations(locales[i], $coreProvider.data[locales[i]].translation);
         }
 }]);
+
+app.factory('facebookService', function($q) {
+        return {
+            getMyLastName: function() {
+                var deferred = $q.defer();
+                FB.api('/me', {
+                    fields: 'last_name'
+                }, function(response) {
+                    if (!response || response.error) {
+                        deferred.reject('Error occured');
+                    } else {
+                        deferred.resolve(response);
+                    }
+                });
+                return deferred.promise;
+            }
+        }
+    });
+
+
+app.run(['$rootScope', '$window',
+    function($rootScope, $window) {
+
+        $rootScope.user = {};
+
+        $window.fbAsyncInit = function() {
+            FB.init({
+                appId: '1737582193227816',
+                status: true,
+                cookie: true,
+                xfbml: true,
+                version: 'v2.8'
+            });
+        };
+        
+        (function(d){
+            // load the Facebook javascript SDK
+
+            var js,
+                id = 'facebook-jssdk',
+                ref = d.getElementsByTagName('script')[0];
+
+            if (d.getElementById(id)) {
+                return;
+            }
+
+            js = d.createElement('script');
+            js.id = id;
+            js.async = true;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+
+            ref.parentNode.insertBefore(js, ref);
+
+        }(document));
+
+    }]);
 
 
