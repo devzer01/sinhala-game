@@ -32,12 +32,12 @@ angular.module('com.github.devzer01.typeMaster.core.data.sinhala', ['com.github.
                 'STEP2' : 'දකින වචනය ටයිප් කරන්න',
                 'STEP3' : 'ශුද්ධ සිංහල පමණි (ෆොනෙටික් භාවිතා නොකරන්න)',
                 'START' : 'ආරම්භය',
-                'EFFICIENCY': '',
-                'TIME': '',
-                'SCORE': '',
-                'LOOSE': 'LOOSE',
-                'WON': 'WON',
-                'PLAY_AGAIN': ''
+                'EFFICIENCY': 'කාර්යක්ෂමතාව',
+                'TIME': 'වෙලාව',
+                'SCORE': 'ලකුණු',
+                'LOOSE': 'පරාජය',
+                'WON': 'දිනුම',
+                'PLAY_AGAIN': 'නැවත'
             }
         };
 }]);

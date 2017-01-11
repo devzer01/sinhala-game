@@ -21,11 +21,13 @@ angular.module('com.github.devzer01.typeMaster.game', ['ngRoute', 'com.github.de
             $scope.levels = $core.levels;
 
             $scope.$coreService = $coreService;
+            
+            $translate.use($core.pack);
 
             angular.element(document).ready(function () {
                 //$scope.start();
-                $coreService.setup($core.words[$core.level], $core.filter, $core.keyboard);
                 console.log($core);
+                $coreService.setup($core.data[$core.pack].words[$core.level], $core.data[$core.pack].filter, $core.data[$core.pack].keyboard);
                 $analytics.pageTrack('/games');
                 $scope.countdownStart();
                 //$analytics.eventTrack('firstTry', {  category: gameCore.level, label: 'level' });
