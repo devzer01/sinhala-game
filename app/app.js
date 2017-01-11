@@ -75,7 +75,7 @@ app.run(['$rootScope', '$window',
                 version: 'v2.8'
             });
         };
-        
+
         (function(d){
             // load the Facebook javascript SDK
 
