@@ -2,7 +2,7 @@
 
 var gameData = null;
 
-var stepsPerGame = 2;
+var stepsPerGame = 10;
 
 var core = angular.module('com.github.devzer01.typeMaster.core', []);
 

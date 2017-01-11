@@ -43,22 +43,24 @@ angular.module('com.github.devzer01.typeMaster.game', ['ngRoute', 'com.github.de
                 $scope.countdownStart();
             };
 
-            var stop;
+            var stop; var cancel;
             $scope.gameStart = function() {
                 if ( angular.isDefined(stop) ) return;
                 if (!$coreService.active) {
                     $coreService.active = true;
                     $coreService.getNextWord(); //යැරටැරට
                 }
+                cancel = false;
                 stop = $interval(function() {
-                    if ($scope.roundTimer <= 0.01 || $coreService.active === false) {
+                    if (!cancel && ($scope.roundTimer <= 0.01 || $coreService.active === false)) {
+                        cancel = !cancel;
                         $interval.cancel(stop);
                         stop = undefined;
                         return $scope.gameStop();
                     }
                     $window.document.getElementById("type-here").focus();
-                    $scope.roundTimer -= 0.01;
-                }, 10);
+                    $scope.roundTimer -= 0.1;
+                }, 100);
             };
 
             $scope.setLevel = function (v) {
