@@ -13,8 +13,8 @@ angular.module('com.github.devzer01.typeMaster.game', ['ngRoute', 'com.github.de
 
     }])
 
-    .controller('GameCtrl', ['$scope', '$interval', '$core', '$window', '$analytics', '$coreService', '$translate',
-        function ($scope, $interval, $core, $window, $analytics, $coreService, $translate) {
+    .controller('GameCtrl', ['$scope', '$interval', '$core', '$window', '$analytics', '$coreService', '$translate', 'facebookService', '$rootScope',
+        function ($scope, $interval, $core, $window, $analytics, $coreService, $translate, facebookService, $rootScope) {
 
             $scope.difficulty = $core.level;
 
@@ -80,6 +80,7 @@ angular.module('com.github.devzer01.typeMaster.game', ['ngRoute', 'com.github.de
             };
 
             $scope.gameStop = function () {
+                if (!$coreService.active) return;
                 $coreService.active = false;
                 if ($coreService.req !== $coreService.correct) {
                     $translate("LOOSE").then(function (result) {
@@ -102,7 +103,7 @@ angular.module('com.github.devzer01.typeMaster.game', ['ngRoute', 'com.github.de
                     }, 0.00);
                     $scope.rate = ($coreService.progress.length / r) * 100;
                 }
-
+                facebookService.putScore($rootScope.user.id, $coreService.score);
                 $scope.gameResult = true;
             };
 

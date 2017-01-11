@@ -11,19 +11,14 @@ angular.module('com.github.devzer01.typeMaster.welcome', ['ngRoute', 'com.github
 
 }])
 
-    .controller('WelcomeCtrl', ['$scope' , '$location', '$core', '$translate', '$window', function ($scope, $location, $core, $translate, $window) {
+    .controller('WelcomeCtrl', ['$scope' , '$location', '$core', '$translate', '$window', '$rootScope', function ($scope, $location, $core, $translate, $window, $rootScope) {
 
         if ($core.pack === null) {
             return $location.path('selection');
         }
 
-        $scope.getMyLastName = function() {
-            facebookService.getMyLastName()
-                .then(function(response) {
-                        $scope.last_name = response.last_name;
-                    }
-                );
-        };
+
+        $scope.scores = $rootScope.scores;
 
 
         $scope.pack = $core.pack;

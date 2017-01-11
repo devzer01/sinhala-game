@@ -8,15 +8,23 @@
         </div>
     </div>
     <hr />
-    <div class="row" ng-hide="isTh">
-        <div class="col-xs-12 col-sm-6 col-md-6 text-center small vcenter" translate>HELPTITLE</div>
-        <div class="visible-xs">&nbsp;</div>
-        <div class="col-xs-12 col-sm-6 col-md-6 text-center">
-            <button id="showHelp" class="btn btn-default btn-info" ng-click="help()" translate>HELP</button>
-        </div>
+    <div class="row">
+    <h3 class="text-center" translate>SCOREBOARD</h3>
+    <table class="col-xs-12 table-bordered">
+        <tr>
+            <th translate>NAME</th>
+            <th translate>SCORE</th>
+        </tr>
+
+        <tr ng-repeat="score in scores">
+            <td>{{ score.user.name }}</td>
+            <td>{{ score.score }}</td>
+        </tr>
+    </table>
     </div>
     <hr />
-    <div class="row" style="height: 130px;">
+
+    <div class="row clearfix"">
         <div class="col-xs-12">
             <h4 class="text-left" style="color: green;"><strong translate>HOWTOTITLE</strong></h4>
         </div>

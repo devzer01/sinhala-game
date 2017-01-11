@@ -69,7 +69,9 @@ angular.module('com.github.devzer01.typeMaster.core.data.thai', ['com.github.dev
                 'EFFICIENCY': 'ประสิทธิภาพ',
                 'TIME': 'เวลา',
                 'SCORE': 'คะแนน',
-                'PLAY_AGAIN': 'เล่นอีกครั้ง'
+                'PLAY_AGAIN': 'เล่นอีกครั้ง',
+                'NAME': 'ชื่อ',
+                'SCOREBOARD': 'ป้ายบอกคะแนน'
             }
         };
 }]);
