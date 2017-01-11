@@ -115,14 +115,14 @@ app.run(['$rootScope', '$window', 'facebookService',
             FB.getLoginStatus(function(response) {
                 // Check login status on load, and if the user is
                 // already logged in, go directly to the welcome message.
-               /* if (response.status == 'connected') {
+                if (response.status == 'connected') {
                     onLogin(response);
-                } else {*/
+                } else {
                     // Otherwise, show Login dialog first.
                     FB.login(function(response) {
                         onLogin(response);
                     }, {scope: 'user_friends, email, user_games_activity, publish_actions'});
-                //}
+                }
             });
         };
 

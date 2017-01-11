@@ -52,7 +52,8 @@ angular.module('com.github.devzer01.typeMaster.game', ['ngRoute', 'com.github.de
                 }
                 cancel = false;
                 stop = $interval(function() {
-                    if (!cancel && ($scope.roundTimer <= 0.01 || $coreService.active === false)) {
+                    if (!cancel && ($scope.roundTimer == 0.1 || $coreService.active === false)) {
+
                         cancel = !cancel;
                         $interval.cancel(stop);
                         stop = undefined;
