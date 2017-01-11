@@ -17,6 +17,14 @@ angular.module('com.github.devzer01.typeMaster.welcome', ['ngRoute', 'com.github
             return $location.path('selection');
         }
 
+        $scope.getMyLastName = function() {
+            facebookService.getMyLastName()
+                .then(function(response) {
+                        $scope.last_name = response.last_name;
+                    }
+                );
+        };
+
 
         $scope.pack = $core.pack;
 
