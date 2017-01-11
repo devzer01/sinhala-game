@@ -37,7 +37,9 @@ angular.module('com.github.devzer01.typeMaster.core.data.sinhala', ['com.github.
                 'SCORE': 'ලකුණු',
                 'LOOSE': 'පරාජය',
                 'WON': 'දිනුම',
-                'PLAY_AGAIN': 'නැවත'
+                'PLAY_AGAIN': 'නැවත',
+                'NAME': 'නම',
+                'SCOREBOARD': 'ලකුනු පුවරුව'
             }
         };
 }]);

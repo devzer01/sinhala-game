@@ -2,6 +2,8 @@
 
 var gameData = null;
 
+var stepsPerGame = 2;
+
 var core = angular.module('com.github.devzer01.typeMaster.core', []);
 
 core.config(function ($provide) {
@@ -54,7 +56,7 @@ core.service('$coreService',['$interval', '$window', function ($interval, $windo
 
         this.setup = function ($data, $filter, $keyboard) {
             this.data = $data;
-            this.game = this.shuffle(this.data).slice(0, 10);
+            this.game = this.shuffle(this.data).slice(0, stepsPerGame);
             this.req = 10;
             this.filter = $filter;
             this.keyboard = $keyboard;
@@ -88,7 +90,7 @@ core.service('$coreService',['$interval', '$window', function ($interval, $windo
             this.req = 0;
             this.progress = [];
             this.counter = 0;
-            this.game = this.shuffle(this.data).slice(0, 10);
+            this.game = this.shuffle(this.data).slice(0, stepsPerGame);
         };
 
         this.current = {

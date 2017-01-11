@@ -12,7 +12,7 @@ angular.module('com.github.devzer01.typeMaster.selection', ['ngRoute', 'com.gith
 
 }])
 
-    .controller('SelectionCtrl', ['$scope' , '$location', '$core', '$translate', '$window', '$injector', function ($scope, $location, $core, $translate, $window, $injector) {
+    .controller('SelectionCtrl', ['$scope' , '$location', '$core', '$translate', '$window', '$injector', '$rootScope', function ($scope, $location, $core, $translate, $window, $injector, $rootScope) {
 
         $translate.use('en');
 
@@ -25,6 +25,7 @@ angular.module('com.github.devzer01.typeMaster.selection', ['ngRoute', 'com.gith
         });
 
         $scope.setPack = function (v) {
+            console.log($rootScope);
             $translate.use(v);
             $core.setPack(v);
             $core.setConfig($core.data[v]);

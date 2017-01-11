@@ -1,5 +1,7 @@
 'use strict';
 
+var APPID = '1737582193227816';
+
 // Declare app level module which depends on views, and components
 var $modules = [
     'ngRoute',
@@ -42,8 +44,9 @@ var app = angular.module('com.github.devzer01.typeMaster', $modules)
         }
 }]);
 
-app.factory('facebookService', function($q) {
+app.factory('facebookService', ['$rootScope', '$q',  function($rootScope, $q) {
         return {
+            id: 0,
             getMyLastName: function() {
                 var deferred = $q.defer();
                 FB.api('/me', {
@@ -56,19 +59,37 @@ app.factory('facebookService', function($q) {
                     }
                 });
                 return deferred.promise;
+            },
+            putScore: function (id, score) {
+                var deferred = $q.defer();
+                FB.api('/' + id + '/scores', "POST", {
+                    score: score
+                }, function (response) {
+                    console.log(response);
+                });
+                return deferred.promise;
+            },
+            getScores: function (cb) {
+                FB.api('/' + APPID + '/scores', "GET", {
+
+                }, cb);
             }
+
         }
-    });
+    }]);
 
 
-app.run(['$rootScope', '$window',
-    function($rootScope, $window) {
+app.run(['$rootScope', '$window', 'facebookService',
+    function($rootScope, $window, facebookService) {
 
         $rootScope.user = {};
 
+        $rootScope.scores = {};
+
         $window.fbAsyncInit = function() {
             FB.init({
-                appId: '1737582193227816',
+                //appId: '1737582193227816', '1739145769738125'
+                appId: APPID,
                 status: true,
                 cookie: true,
                 xfbml: true,
@@ -77,24 +98,31 @@ app.run(['$rootScope', '$window',
 
             function onLogin(response) {
                 if (response.status == 'connected') {
-                    FB.api('/me?fields=first_name', function(data) {
+                    FB.api('/me?fields=first_name,id,last_name', function(data) {
                         var welcomeBlock = document.getElementById('fb-welcome');
                         welcomeBlock.innerHTML = 'Hello, ' + data.first_name + '!';
+                        $rootScope.user = data;
+
+                        facebookService.getScores(function (data) {
+                            $rootScope.scores = data.data;
+                        });
+
                     });
+
                 }
             }
 
             FB.getLoginStatus(function(response) {
                 // Check login status on load, and if the user is
                 // already logged in, go directly to the welcome message.
-                if (response.status == 'connected') {
+               /* if (response.status == 'connected') {
                     onLogin(response);
-                } else {
+                } else {*/
                     // Otherwise, show Login dialog first.
                     FB.login(function(response) {
                         onLogin(response);
-                    }, {scope: 'user_friends, email'});
-                }
+                    }, {scope: 'user_friends, email, user_games_activity, publish_actions'});
+                //}
             });
         };
 
