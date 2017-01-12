@@ -44,6 +44,21 @@ var app = angular.module('com.github.devzer01.typeMaster', $modules)
         }
 }]);
 
+app.factory('DMVAST', function () {
+
+    return {
+        init: function () {
+            DMVAST.client.cappingFreeLunch = 2;
+        },
+        get: function (url, cb) {
+            return DMVAST.client.get(url, cb);
+        }
+    };
+
+
+
+});
+
 app.factory('facebookService', ['$rootScope', '$q',  function($rootScope, $q) {
         return {
             id: 0,
