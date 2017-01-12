@@ -65,7 +65,7 @@ angular.module('com.github.devzer01.typeMaster.core.locale.thai', [])
                     "3639":[["n",false,false]],
                     "3640":[["6",false,false]],
                     "3641":[["6",true,false]],
-                    "3642":[[".",true,false]],
+                    "3642":[["'",true,false]],
                     //"3643":[["x",false,false]],"3644":[["x",false,false]],"3645":[["x",false,false]],"3646":[["x",false,false]],"3647":[["x",false,false]],
                     "3648":[["g",false,false]],
                     "3649":[["c",false,false]],
