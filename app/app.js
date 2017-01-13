@@ -48,7 +48,7 @@ app.factory('DMVAST', function () {
 
     return {
         init: function () {
-            DMVAST.client.cappingFreeLunch = 2;
+            DMVAST.client.cappingFreeLunch = 10;
         },
         get: function (url, cb) {
             DMVAST.client.cappingFreeLunch = 2;
