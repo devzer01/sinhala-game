@@ -371,7 +371,7 @@ var flashTester = { isSupported: function isSupported() {
 
 var VPAIDFLASHClient = function () {
     function VPAIDFLASHClient(vpaidParentEl, callback) {
-        var swfConfig = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : { data: 'VPAIDFlash.swf', width: 800, height: 400 };
+        var swfConfig = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : { data: 'VPAIDFlash.swf', width: 640, height: 360 };
 
         var _this = this;
 
@@ -387,8 +387,8 @@ var VPAIDFLASHClient = function () {
         this._destroyed = false;
         callback = callback || noop;
 
-        swfConfig.width = isPositiveInt(swfConfig.width, 800);
-        swfConfig.height = isPositiveInt(swfConfig.height, 400);
+        swfConfig.width = isPositiveInt(swfConfig.width, 640);
+        swfConfig.height = isPositiveInt(swfConfig.height, 360);
 
         createElementWithID(vpaidParentEl, this._flashID, true);
 
@@ -572,7 +572,7 @@ var FlashTester = function () {
         var params = {};
         params.movie = swfConfig.data;
         params.FlashVars = 'flashid=' + FLASH_TEST_EL + '&handler=' + JSFlashBridge.VPAID_FLASH_HANDLER;
-        params.allowScriptAccess = 'always';
+        params.allowScriptAccess = 'sameDomain';
 
         this.el = swfobject.createSWF(swfConfig, params, FLASH_TEST_EL);
         this._handlers = new MultipleValuesRegistry();
