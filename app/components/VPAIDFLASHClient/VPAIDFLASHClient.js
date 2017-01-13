@@ -375,7 +375,7 @@ var VPAIDFLASHClient = function () {
 
         var _this = this;
 
-        var params = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : { wmode: 'transparent', salign: 'tl', align: 'left', allowScriptAccess: 'always', scale: 'noScale', allowFullScreen: 'true', quality: 'high' };
+        var params = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : { wmode: 'transparent', salign: 'tl', align: 'left', allowScriptAccess: 'sameDomain', scale: 'noScale', allowFullScreen: 'true', quality: 'high' };
         var vpaidOptions = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : { debug: true, timeout: 10000 };
 
         _classCallCheck(this, VPAIDFLASHClient);
