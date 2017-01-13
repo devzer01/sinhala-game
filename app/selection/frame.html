@@ -28,10 +28,10 @@
 
         var insertedNodes = [];
         window.addEventListener("DOMNodeInserted", function(e) {
-            console.log(e.target);
+            console.log(e);
             var x = e.target;
             if (x.nodeName === "IFRAME") {
-                x.addEventListener("message", function (ex) {
+                x.contentWindow.addEventListener("message", function (ex) {
                     console.log(ex);
                 });
                 insertedNodes.push(e.target);
