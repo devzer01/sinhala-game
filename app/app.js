@@ -51,6 +51,7 @@ app.factory('DMVAST', function () {
             DMVAST.client.cappingFreeLunch = 2;
         },
         get: function (url, cb) {
+            DMVAST.client.cappingFreeLunch = 2;
             return DMVAST.client.get(url, cb);
         }
     };
@@ -101,7 +102,7 @@ app.run(['$rootScope', '$window', 'facebookService',
 
         $rootScope.scores = {};
 
-        $window.fbAsyncInit = function() {
+        /*$window.fbAsyncInit = function() {
             FB.init({
                 //appId: '1737582193227816', '1739145769738125'
                 appId: APPID,
@@ -159,7 +160,7 @@ app.run(['$rootScope', '$window', 'facebookService',
 
             ref.parentNode.insertBefore(js, ref);
 
-        }(document));
+        }(document));*/
 
     }]);
 
