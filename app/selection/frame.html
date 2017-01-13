@@ -7,102 +7,98 @@
     <script src="../bower_components/vast-client-js/vast-client.js"></script>
     <script src="../bower_components/swfobject/swfobject/swfobject.js"></script>
     <script src="../components/VPAIDFLASHClient/VPAIDFLASHClient.js"></script>
-    <script>
-
-        $(function () {
-            $("#playb").click(function (e) {
-/*
-                DMVAST.client.cappingFreeLunch = 2;
-                DMVAST.client.get("https://ima3vpaid.appspot.com/?adTagUrl=https%3A%2F%2Fgoogleads.g.doubleclick.net%2Fpagead%2Fads%3Fclient%3Dca-video-pub-8637246282765423%26slotname%3D8181847317%26ad_type%3Dvideo%26description_url%3Dhttp%253A%252F%252Fapplixir.com%26max_ad_duration%3D30000%26videoad_start_delay%3D0&type=all", function (response, error) {
-                    console.log(error);
-                    console.log(response);
-
-                    //var VPAIDFLASHClient = require('../components/VpaidFlash/VPAIDFLASHClient');
-*/
-
-                    var el = document.getElementById('myContent');
-                    //var media = response.ads[0].creatives[0].mediaFiles[0];
-                    var flashVPaid = new VPAIDFLASHClient(el, flashVPAIDWrapperLoaded);
-
-                    function flashVPAIDWrapperLoaded(err, result) {
-                        if (err) {
-                            //handle error here
-                            return;
-                        }
-
-                        //{data: media.fileURL, width: media.width, height: media.height}
-
-                        flashVPaid.loadAdUnit("https://imasdk.googleapis.com/flash/sdkloader/vpaid1adsdk.swf?adTagUrl=https%3A%2F%2Fgoogleads.g.doubleclick.net%2Fpagead%2Fads%3Fclient%3Dca-video-pub-8637246282765423%26slotname%3D8181847317%26ad_type%3Dvideo%26description_url%3Dhttp%253A%252F%252Fapplixir.com%26max_ad_duration%3D30000%26videoad_start_delay%3D0%26ancr=https%253A%252F%252Flearn.pituwa.co&type=all", function (error, adUnit) {
-
-                            if (err) {
-                                //handle error here
-                                return;
-                            }
-
-                            adUnit.on('AdLoaded', function (err, result) {
-                                console.log('event:AdLoaded', err, result);
-                                startAd();
-                            });
-
-                            adUnit.on('AdStarted', function (err, result) {
-                                console.log('event:AdStarted', err, result);
-                                checkAdProperties();
-                            });
-
-                            adUnit.handshakeVersion('2.0', function (err, result) {
-                                initAd();
-                            });
-
-                            function initAd() {
-                                adUnit.initAd(0, 0, 'normal', -1, '', '', function (err) {
-                                    console.log('initAd', err);
-                                });
-                            }
-
-                            function startAd() {
-                                adUnit.startAd(function (err, result) {
-                                    console.log('startAd call', err, result);
-                                });
-                            }
-
-                            function checkAdProperties() {
-                                adUnit.getAdIcons(function (err, result) {
-                                    console.log('getAdIcons', result);
-                                });
-                                adUnit.setAdVolume(10, function (err, result) {
-                                    console.log('setAdVolume', result);
-                                });
-                                adUnit.getAdVolume(function (err, result) {
-                                    console.log('getAdVolume', result);
-                                });
-                            }
-
-                        });
-                    }
-
-
-                    var video = document.getElementById('myVideo');
-                    var skipAd = document.getElementById('skipAd');
-                    //var vpaid = new VPAIDHTML5Client(el, video, {});
-
-                    //vpaid.loadAdUnit(response.ads[0].creatives[0].mediaFiles[0].fileURL, onLoad);
-                });
-        });
-    </script>
 </head>
 <body>
 
-<div style="position: relative; width:480px; height:360px;">
-    <button id="skipAd">Skip ad</button>
+<div style="position: relative; width:500px; height: 450px;">
     <div id="myContent" style="position: absolute; top: 0; left: 0; z-index: 1; width: 480px; height: 360px;"></div>
-    <video width="480" height="360" id="myVideo" controls>
-        <source src="http://www.w3schools.com/html/movie.mp4" type="video/mp4">
-    </video>
 </div>
 
 <hr />
 <div class="row">
     <button id="playb">Play</button>
 </div>
+<script>
+
+    var el = document.getElementById('myContent');
+
+    var flashVPaid = null;
+
+    jQuery(document).ready(function () {
+
+
+        jQuery("#playb").click(function (e) {
+
+            if (flashVPaid === null) flashVPaid = new VPAIDFLASHClient(el, flashVPAIDWrapperLoaded);
+
+            console.log(e);
+
+            flashVPaid.loadAdUnit("https://imasdk.googleapis.com/flash/sdkloader/vpaid1adsdk.swf?adTagUrl=https%3A%2F%2Fgoogleads.g.doubleclick.net%2Fpagead%2Fads%3Fclient%3Dca-video-pub-8637246282765423%26slotname%3D8181847317%26ad_type%3Dvideo%26description_url%3Dhttp%253A%252F%252Fapplixir.com%26max_ad_duration%3D30000%26videoad_start_delay%3D0%26ancr=https%253A%252F%252Flearn.pituwa.co&type=all", function (error, adUnit) {
+
+                if (error) {
+                    console.log(error);
+                    return;
+                }
+
+                adUnit.on('AdLoaded', function (err, result) {
+                    console.log('event:AdLoaded', err, result);
+                    startAd();
+                });
+
+                adUnit.on('AdStarted', function (err, result) {
+                    console.log('event:AdStarted', err, result);
+                    checkAdProperties();
+                });
+
+                adUnit.handshakeVersion('2.0', function (err, result) {
+                    initAd();
+                });
+
+                function initAd() {
+                    adUnit.initAd(0, 0, 'normal', -1, '', '', function (err) {
+                        console.log('initAd', err);
+                    });
+                }
+
+                function startAd() {
+                    adUnit.startAd(function (err, result) {
+                        console.log('startAd call', err, result);
+                    });
+                }
+
+                function checkAdProperties() {
+                    adUnit.getAdIcons(function (err, result) {
+                        console.log('getAdIcons', result);
+                    });
+                    adUnit.setAdVolume(10, function (err, result) {
+                        console.log('setAdVolume', result);
+                    });
+                    adUnit.getAdVolume(function (err, result) {
+                        console.log('getAdVolume', result);
+                    });
+                }
+
+            });
+
+            //var video = document.getElementById('myVideo');
+            //var skipAd = document.getElementById('skipAd');
+            //var vpaid = new VPAIDHTML5Client(el, video, {});
+
+            //vpaid.loadAdUnit(response.ads[0].creatives[0].mediaFiles[0].fileURL, onLoad);
+        });
+    });
+
+
+
+
+        function flashVPAIDWrapperLoaded(err, result) {
+            if (err) {
+                console.log(err);
+                return;
+            }
+            console.log(result);
+            //{data: media.fileURL, width: media.width, height: media.height}
+        }
+</script>
 </body>
 </html>
