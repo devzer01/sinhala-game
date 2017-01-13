@@ -13,3 +13,44 @@
       <tbody id="history"></tbody>
     </table>
   </div>
+
+
+  ad_type:video
+  adk:2321514370
+  adsafe:high
+  ancr:https://apps.facebook.com
+  channel:vpaidadp
+  client:ca-video-pub-8637246282765423
+  correlator:1484306267753
+  dt:1484306267774
+  flash:24.0.0.194
+  frm:2
+  frmd:2
+  ged:ve4_td134_tt120_pd134_la1000_er8.8.408.808_vi0.0.796.696_vp86_eb20331
+  max_ad_duration:33000
+  num_ads:1
+  osd:6
+  output:xml_vast3
+  ref:https://learn.pituwa.co/
+  sdkv:3.253.0
+  sdr:1
+  slotname:8181847317
+  sz:800x400
+  t_pyv:exclude
+  u_ah:1057
+  u_asa:1
+  u_aw:1916
+  u_cd:24
+  u_h:1080
+  u_his:2
+  u_java:false
+  u_nmime:7
+  u_nplug:5
+  u_tz:420
+  u_w:1920
+  unviewed_position_start:1
+  url:https://learn.pituwa.co/
+  video_format:18
+  video_product_type:0
+  video_url_to_fetch:http://applixir.com
+  videoad_start_delay:0
