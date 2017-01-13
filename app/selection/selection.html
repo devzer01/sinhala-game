@@ -1,3 +1,14 @@
+<style type="text/css">
+    iframe {
+        width: 500px;
+        height: 450px;
+    }
+
+    div.vdo {
+        width: 500px;
+        height: 450px;
+    }
+</style>
 <div class="container-fluid" id="welcome" ng-controller="SelectionCtrl">
     <div class="row">
         <div class="col-xs-12 text-right" style="padding-left: 0px; padding-right: 0px; background-image: url(image/bghead.png); background-position: left; background-repeat: no-repeat; ">
@@ -11,7 +22,7 @@
             <button class="btn btn-primary btn-lg startButton" ng-click="setPack(value.locale)" analytics-on="click" analytics-event="gameStart">{{value.name}}<br/><small>{{value.localName}}</small></button>
         </div>
     </div>
-    <div style="width:500px; height: 450px;">
-        <iframe style="width:500px; height: 450px;" src="/selection/frame.html"></iframe>
+    <div class="vdo">
+        <iframe src="//learn.pituwa.co/selection/frame.html"></iframe>
     </div>
 </div>
