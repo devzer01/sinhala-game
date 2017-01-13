@@ -26,6 +26,39 @@
 
     jQuery(document).ready(function () {
 
+        var insertedNodes = [];
+        window.addEventListener("DOMNodeInserted", function(e) {
+            console.log(e.target);
+            var x = e.target;
+            if (x.nodeName === "IFRAME") {
+                x.addEventListener("message", function (ex) {
+                    console.log(ex);
+                });
+                insertedNodes.push(e.target);
+                //insertedNodes.push(mutation.addedNodes[i]);
+            }
+        }, false);
+
+        /*var insertedNodes = [];
+        var observer = new MutationObserver(function(mutations) {
+            console.log(mutations);
+            mutations.forEach(function(mutation) {
+                for (var i = 0; i < mutation.addedNodes.length; i++) {
+                    console.log(mutation.addedNodes[i]);
+                    if (mutation.addedNodes[i].nodeName === "IFRAME") {
+                        mutation.addedNodes[i].window.addEventListener("message", function (e) {
+                            console.log(e);
+                        });
+                        insertedNodes.push(mutation.addedNodes[i]);
+
+                    }
+                }
+            });
+            console.log(insertedNodes);
+        });
+        observer.observe(document, { childList: true });*/
+
+
 
         jQuery("#playb").click(function (e) {
 
@@ -103,7 +136,7 @@
 
         window.addEventListener("message", function (e) {
                 console.log(e);
-        })
+        });
 
 </script>
 </body>
