@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>VPAIDHTML5Client</title>
+    <link rel="stylesheet" href="demo.css">
+</head>
+<body>
+    <div style="position: relative; width:480px; height:360px;">
+        <button id="skipAd">Skip ad</button>
+        <div id="myContent" style="position: absolute; top: 0; left: 0; z-index: 1; width: 480px; height: 360px;"></div>
+        <video width="480" height="360" id="myVideo" controls>
+        </video>
+    </div>
+    <script src="VPAIDHTML5Client.js"></script>
+    <script src="../../swfobject/swfobject/swfobject.js"></script>
+    <script>
+        var init = function() {
+            console.log('loaded');
+            var el = document.getElementById('myContent');
+            var video = document.getElementById('myVideo');
+            var skipAd = document.getElementById('skipAd');
+            var vpaid = new VPAIDHTML5Client(el, video, {});
+            var urls = [
+                {
+                    url: 'http://cdn-assets.brainient.com/2015/mailonline_example/vpaid.js',
+                    adParameters: ''
+                },
+                {
+                    url: 'VPAIDAdLinear.js',
+                    adParameters: JSON.stringify(
+                        {
+                            videos: [
+                                {
+                                    url: 'http://video.webmfiles.org/big-buck-bunny_trailer.webm',
+                                    mimetype: 'video/webm'
+                                },
+                                {
+                                    url: 'http://download.wavetlan.com/SVV/Media/HTTP/MP4/ConvertedFiles/Media-Convert/Unsupported/test7.mp4',
+                                    mimetype: 'video/mp4'
+                                }
+                            ],
+                            clickThru: {
+                                playerHandles: false,
+                                trackID: 123,
+                                url: 'http://www.dailymail.com'
+                            }
+                        }
+                    )
+                }
+            ];
+
+            function getRandomAd() {
+                return urls[Math.round((urls.length - 1) * Math.random())];
+            }
+
+            var currentAd = getRandomAd();
+
+            vpaid.loadAdUnit("https://imasdk.googleapis.com/js/sdkloader/vpaid_adapter.js?adTagUrl=https%3A%2F%2Fgoogleads.g.doubleclick.net%2Fpagead%2Fads%3Fclient%3Dca-video-pub-8637246282765423%26slotname%3D8181847317%26ad_type%3Dvideo%26description_url%3Dhttp%253A%252F%252Fapplixir.com%26max_ad_duration%3D30000%26videoad_start_delay%3D0&type=all", onLoad);
+
+            function onLoad(err, adUnit) {
+                if (err) {
+                    console.log(err);
+                    return;
+                }
+
+                adUnit.subscribe('AdLoaded', onInit);
+
+                [
+                    'AdStopped',
+                    'AdSkipped',
+                    'AdSizeChange',
+                    'AdLinearChange',
+                    'AdDurationChange',
+                    'AdExpandedChange',
+                    'AdRemainingTimeChange', // [Deprecated in 2.0] but will be still fired for backwards compatibility
+                    'AdVolumeChange',
+                    'AdImpression',
+                    'AdVideoStart',
+                    'AdVideoFirstQuartile',
+                    'AdVideoMidpoint',
+                    'AdVideoThirdQuartile',
+                    'AdVideoComplete',
+                    'AdInteraction',
+                    'AdUserAcceptInvitation',
+                    'AdUserMinimize',
+                    'AdUserClose',
+                    'AdPaused',
+                    'AdPlaying',
+                    'AdLog',
+                    'AdError'
+                ].forEach(function (event) {
+                    adUnit.subscribe(event, function () {
+                        console.log('---------------------------------------> ' + event, 'arguments:', arguments);
+                    })
+                });
+
+                adUnit.subscribe('AdSkippableStateChange', function () {
+                    skipAd.style.display = 'block';
+                    console.log('---------------------------------------> AdSkippableStateChange', 'arguments:', arguments);
+                });
+
+
+                adUnit.subscribe('AdClickThru', function (clickData) {
+                    console.log('---------------------------------------> AdClickThru', 'arguments:', arguments);
+                    if (clickData.playerHandles) {
+                        window.open(clickData.url, '_blank');
+                    }
+                });
+
+                adUnit.subscribe('AdStarted', function () {
+                    console.log('---------------------------------------> AdStarted');
+                    adUnit.setAdVolume(0);
+                });
+
+                skipAd.addEventListener('click', function () {
+                    adUnit.skipAd();
+                });
+
+                adUnit.handshakeVersion('2.0', onHandShake);
+
+                function onHandShake(error, result) {
+                    console.log('-------------------------------> onHandShake');
+                    console.log('version:', result);
+                    adUnit.initAd(480, 360, 'normal', -1, {AdParameters: currentAd.adParameters}, {}, function (err) {
+                        console.log('error?', err);
+                    });
+                }
+
+                function onInit() {
+                    console.log('------------------------------> AdLoaded');
+                    adUnit.startAd(function (error) {
+                        console.log('startAd', error);
+                    });
+                }
+            }
+        }
+        window.onload(init());
+    </script>
+</body>
+</html>

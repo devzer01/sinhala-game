@@ -1,0 +1,23 @@
+{
+  "name": "VPAIDHTML5Client",
+  "version": "0.1.14",
+  "homepage": "https://github.com/MailOnline/VPAIDHTML5Client",
+  "authors": [
+    "Luis Silva <luis.dasilva@mailonline.co.uk>"
+  ],
+  "description": "VPAID HTML5",
+  "main": "src/VPAIDHTML5Client.js",
+  "keywords": [
+    "VPAID",
+    "HTML5",
+    "JS",
+    "VIDEO",
+    "IAB"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "node_modules",
+    "bower_components",
+    "test"
+  ]
+}

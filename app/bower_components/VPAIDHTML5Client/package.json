@@ -1,0 +1,56 @@
+{
+  "name": "vpaid-html5-client",
+  "version": "0.1.14",
+  "description": "VPAID HTML5",
+  "main": "js/VPAIDHTML5Client.js",
+  "scripts": {
+    "start": "gulp serve",
+    "test": "gulp test:ci"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MailOnline/VPAIDHTML5Client.git"
+  },
+  "authors": [
+    "Luis Silva <luis.dasilva@mailonline.co.uk>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "VPAID",
+    "HTML5",
+    "JS",
+    "VIDEO",
+    "IAB"
+  ],
+  "bugs": {
+    "url": "https://github.com/MailOnline/VPAIDHTML5Client/issues"
+  },
+  "homepage": "https://github.com/MailOnline/VPAIDHTML5Client",
+  "devDependencies": {
+    "browser-sync": "^2.11.1",
+    "browserify": "^13.0.0",
+    "browserify-istanbul": "^0.2.1",
+    "chai": "^3.0.0",
+    "gulp": "^3.9.0",
+    "gulp-gh-pages": "^0.5.2",
+    "gulp-sourcemaps": "^1.5.2",
+    "gulp-util": "^3.0.5",
+    "karma": "^0.13.19",
+    "karma-browserify": "^5.0.1",
+    "karma-chai-sinon": "^0.1.5",
+    "karma-chrome-launcher": "^0.2.2",
+    "karma-coverage": "^0.5.3",
+    "karma-firefox-launcher": "^0.1.6",
+    "karma-mocha": "^0.2.1",
+    "karma-source-map-support": "^1.0.0",
+    "karma-spec-reporter": "^0.0.23",
+    "lodash": "^4.0.1",
+    "mocha": "^2.2.5",
+    "mversion": "^1.10.1",
+    "sinon": "^1.14.1",
+    "sinon-chai": "^2.8.0",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.7.0"
+  }
+}

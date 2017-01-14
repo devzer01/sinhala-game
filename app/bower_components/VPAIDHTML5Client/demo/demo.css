@@ -1,0 +1,16 @@
+iframe {
+    border: 0;
+}
+
+video {
+    border: 1px solid;
+}
+
+#skipAd {
+    display: none;
+    position: absolute;
+    right: 10px;
+    bottom: 50px;
+    z-index: 2;
+}
+
